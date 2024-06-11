@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reset Password Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .container h1 {
+            margin-top: 0;
+        }
+        .container form {
+            display: flex;
+            flex-direction: column;
+        }
+        .container form input {
+            margin-bottom: 10px;
+            padding: 8px;
+            font-size: 16px;
+        }
+        .container form button {
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Reset Password</h1>
+        <form id="reset-password-form">
+            <input type="email" name="email" placeholder="Enter your email address..." id="email" required>
+            <input type="password" name="new-password" placeholder="Enter your new password..." id="new-password" required>
+            <button type="submit">RESET PASSWORD</button>
+        </form>
+
+        <p id="message"></p>
+    </div>
+
+    <script>
+        document.getElementById('reset-password-form').addEventListener('submit', (event) => {
+            event.preventDefault();
+            const urlParams = new URLSearchParams(window.location.search);
+            const token = urlParams.get('token');
+            const email = document.getElementById('email').value;
+            const newPassword = document.getElementById('new-password').value;
+            const messageElem = document.getElementById('message');
+
+            fetch('/users/update-password', {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ email_address: email, password_hash: newPassword })
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Netowrk response was not ok...');
+                } else {
+                    return response.json();
+                }
+            })
+            .then(data => {
+                if (data.success) {
+                    messageElem.textContent = 'Password updated successfully!';
+                    messageElem.style.color = 'green';
+                } else {
+                    messageElem.textContent = 'Failed to update password: ' + data.message;
+                    messageElem.style.color = 'red';
+                }
+            })
+            .catch(error => {
+                messageElem.textContent = 'An error occurred: ' + error.message;
+                messageElem.style.color = 'red';
+            });
+        });
+    </script>
+</body>
+</html>

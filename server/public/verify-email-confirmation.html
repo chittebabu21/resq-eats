@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Verification Confirmation Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .container h1 {
+            margin-top: 0;
+        }
+        button {
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Verify Email</h1>
+        <button id="confirm-button">CONFIRM VERIFICATION</button>
+
+        <p id="message"></p>
+    </div>
+
+    <script>
+        const pathSegments = window.location.pathname.split('/');
+        const token = pathSegments[pathSegments.length - 1];
+        const messageElem = document.getElementById('message');
+        const confirmButton = document.getElementById('confirm-button');
+
+        confirmButton.addEventListener('click', () => {
+            fetch(`/users/verify-email/${token}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok...');
+                } else {
+                    return response.json();
+                }
+            })
+            .then(data => {
+                if (data.success) {
+                    messageElem.textContent = 'Email verified successfully!';
+                    messageElem.style.color = 'green';
+                } else {
+                    messageElem.textContent = 'Failed to verify email: ' + data.message;
+                    messageElem.style.color = 'red';
+                }
+            })
+            .catch(error => {
+                messageElem.textContent = 'An error occurred: ' + error.message;
+                messageElem.style.color = 'red';
+            });
+        });
+    </script>
+</body>
+</html>
