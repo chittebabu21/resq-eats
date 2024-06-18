@@ -6,7 +6,18 @@ import { Component } from '@angular/core';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
+  fillList = 'solid';
+  fillMap = 'outline';
 
   constructor() {}
 
+  onListClick() {
+    this.fillList = 'solid';
+    this.fillMap = 'outline';
+  }
+
+  onMapClick() {
+    this.fillList = 'outline';
+    this.fillMap = 'solid';
+  }
 }
