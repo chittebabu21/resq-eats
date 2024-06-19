@@ -1,13 +1,42 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>login</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-list id="container">
+  <ion-item color="warning">
+    <ion-input
+      labelPlacement="floating" 
+      label="Email Address"
+      fill="solid"
+      clearInput="true"
+      type="email"
+    ></ion-input>
+  </ion-item>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">login</ion-title>
-    </ion-toolbar>
-  </ion-header>
-</ion-content>
+  <ion-item color="warning"> 
+    <ion-input
+      labelPlacement="floating" 
+      label="Password"
+      fill="solid"
+      clearInput="true"
+      type="password"
+    ></ion-input>
+  </ion-item>
+
+  <ion-button
+    fill="solid"
+    color="success"
+    expand="block"
+    shape="round"
+  >
+    <ion-icon name="log-in-outline" slot="end"></ion-icon>
+  LOGIN</ion-button>
+
+  <ion-text color="primary">OR</ion-text>
+
+  <ion-button
+    fill="solid"
+    color="danger"
+    expand="block"
+    shape="round"
+  >GOOGLE</ion-button>
+
+  <ion-text color="primary">Do not have an account? Sign up <a routerLink="/register">here.</a></ion-text>
+
+</ion-list>
