@@ -22,7 +22,7 @@ app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
 app.use('uploads', express.static(path.join(__dirname, 'uploads')));
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(cors({ origin: '*' }));
+app.use(cors({ origin: 'http://localhost:8100', credentials: true }));
 
 // configure session middleware
 app.use(session({

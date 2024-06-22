@@ -1,42 +1,53 @@
-<ion-list id="container">
-  <ion-item color="warning">
-    <ion-input
-      labelPlacement="floating" 
-      label="Email Address"
+<form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+  <ion-list id="container">
+    <ion-item color="warning">
+      <ion-input
+        labelPlacement="floating" 
+        label="Email Address"
+        fill="solid"
+        clearInput="true"
+        type="email"
+        formControlName="email_address"
+      ></ion-input>
+    </ion-item>
+  
+    <ion-item color="warning"> 
+      <ion-input
+        labelPlacement="floating" 
+        label="Password"
+        fill="solid"
+        type="password"
+        formControlName="password_hash"
+      >
+      </ion-input>
+    </ion-item>
+  
+    <p *ngIf=" errorMsg !== '' " class="error">{{ errorMsg }}</p>
+  
+    <ion-button
       fill="solid"
-      clearInput="true"
-      type="email"
-    ></ion-input>
-  </ion-item>
-
-  <ion-item color="warning"> 
-    <ion-input
-      labelPlacement="floating" 
-      label="Password"
+      color="success"
+      expand="block"
+      shape="round"
+      type="submit"
+      [disabled]="loginForm.invalid"
+    >
+      <ion-icon name="log-in-outline" slot="end"></ion-icon>
+    LOGIN</ion-button>
+  
+    <ion-text color="primary">OR</ion-text>
+  
+    <ion-button
       fill="solid"
-      clearInput="true"
-      type="password"
-    ></ion-input>
-  </ion-item>
-
-  <ion-button
-    fill="solid"
-    color="success"
-    expand="block"
-    shape="round"
-  >
-    <ion-icon name="log-in-outline" slot="end"></ion-icon>
-  LOGIN</ion-button>
-
-  <ion-text color="primary">OR</ion-text>
-
-  <ion-button
-    fill="solid"
-    color="danger"
-    expand="block"
-    shape="round"
-  >GOOGLE</ion-button>
-
-  <ion-text color="primary">Do not have an account? Sign up <a routerLink="/register">here.</a></ion-text>
-
-</ion-list>
+      color="danger"
+      expand="block"
+      shape="round"
+    >GOOGLE</ion-button>
+  
+    <ion-text color="primary">Do not have an account? Sign up <a routerLink="/register">here.</a></ion-text>
+  </ion-list>
+</form>
+<ion-alert
+  header="SUCCESS!"
+  message="You are logged in successfully!"
+></ion-alert>

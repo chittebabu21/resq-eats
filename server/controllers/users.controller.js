@@ -14,7 +14,6 @@ const {
         deleteUserById, 
         verifyPassword
 } = require('../services/users.service');
-const bodyParser = require('body-parser');
 
 // configurations
 dotenv.config();
@@ -109,23 +108,38 @@ module.exports = {
             });
         }
 
-        // insert new user
-        insertUser(body, (error, results) => {
+        // check if user exists
+        getUserByEmail(body.email_address, (error, results) => {
             if (error) {
-                console.log(`Insert user error: ${error}`);
                 return res.status(400).json({
-                    success: 0,
-                    message: 'Failed to insert new user...'
+                    success: 0, 
+                    message: 'Error in retrieving user...'
                 });
-            } else if (results.user_found) {
+            } else if (results) {
                 return res.status(500).json({
-                    success: 0,
-                    message: 'User already exists...'
+                    success: 0, 
+                    message: `User with email '${body.email_address}' already exists...`
                 });
             } else {
-                return res.status(200).json({
-                    success: 1,
-                    message: 'User created successfully!'
+                // insert new user
+                insertUser(body, (error, results) => {
+                    if (error) {
+                        console.log(`Insert user error: ${error}`);
+                        return res.status(400).json({
+                            success: 0,
+                            message: 'Failed to insert new user...'
+                        });
+                    } else if (results.user_found) {
+                        return res.status(500).json({
+                            success: 0,
+                            message: 'User already exists...'
+                        });
+                    } else {
+                        return res.status(200).json({
+                            success: 1,
+                            message: 'User created successfully!'
+                        });
+                    }
                 });
             }
         });

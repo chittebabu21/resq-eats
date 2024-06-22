@@ -10,6 +10,7 @@
 
 ion-input {
     margin: 15px 10px;
+    color: var(--ion-color-dark-tint);
 }
 
 ion-button {
@@ -20,4 +21,8 @@ ion-button {
 a {
     text-decoration: none;
     color: var(--ion-color-tertiary);
+}
+
+.error {
+    color: var(--ion-color-danger);
 }

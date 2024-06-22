@@ -1,43 +1,62 @@
-<ion-list id="container">
-  <ion-item color="warning">
-    <ion-input
-      labelPlacement="floating" 
-      label="Email Address"
+<form [formGroup]="registerForm" (ngSubmit)="onRegister()">
+  <ion-list id="container">
+    <ion-item color="warning">
+      <ion-input
+        labelPlacement="floating" 
+        label="Username"
+        fill="solid"
+        clearInput="true"
+        type="text"
+        formControlName="username"
+      ></ion-input>
+    </ion-item>
+  
+    <ion-item color="warning">
+      <ion-input
+        labelPlacement="floating" 
+        label="Email Address"
+        fill="solid"
+        clearInput="true"
+        type="email"
+        formControlName="email_address"
+      ></ion-input>
+    </ion-item>
+  
+    <ion-item color="warning"> 
+      <ion-input
+        labelPlacement="floating" 
+        label="Password"
+        fill="solid"
+        clearInput="true"
+        type="password"
+        formControlName="password_hash"
+      ></ion-input>
+    </ion-item>
+  
+    <ion-item color="warning"> 
+      <ion-input
+        labelPlacement="floating" 
+        label="Confirm Password"
+        fill="solid"
+        clearInput="true"
+        type="password"
+        formControlName="confirm_password"
+      ></ion-input>
+    </ion-item>
+  
+    <p *ngIf=" errorMsg !== '' " class="error">{{ errorMsg }}</p>
+  
+    <ion-button
       fill="solid"
-      clearInput="true"
-      type="email"
-    ></ion-input>
-  </ion-item>
-
-  <ion-item color="warning"> 
-    <ion-input
-      labelPlacement="floating" 
-      label="Password"
-      fill="solid"
-      clearInput="true"
-      type="password"
-    ></ion-input>
-  </ion-item>
-
-  <ion-item color="warning"> 
-    <ion-input
-      labelPlacement="floating" 
-      label="Confirm Password"
-      fill="solid"
-      clearInput="true"
-      type="password"
-    ></ion-input>
-  </ion-item>
-
-  <ion-button
-    fill="solid"
-    color="success"
-    expand="block"
-    shape="round"
-  >
-    <ion-icon name="play-outline" slot="end"></ion-icon>
-  REGISTER</ion-button>
-
-  <ion-text color="primary">Already have an account? Log in <a routerLink="/login">here.</a></ion-text>
-
-</ion-list>
+      color="success"
+      expand="block"
+      shape="round"
+      type="submit"
+      [disabled]="registerForm.invalid"
+    >
+      <ion-icon name="play-outline" slot="end"></ion-icon>
+    REGISTER</ion-button>
+  
+    <ion-text color="primary">Already have an account? Log in <a routerLink="/login">here.</a></ion-text>
+  </ion-list>
+</form>

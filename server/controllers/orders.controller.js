@@ -9,6 +9,7 @@ const {
 } = require('../services/orders.service');
 const { insertOrderDetail, deleteOrderDetailById } = require('../services/order_details.service');
 const { getMenuItemById, updateMenuItem } = require('../services/menu.service');
+const { getUserById } = require('../services/users.service');
 
 // export controller modules
 module.exports = {
@@ -77,69 +78,90 @@ module.exports = {
         const foodId = body.food_id;
         const quantity = body.quantity;
 
-        if (!body.user_id || !body.food_id || !body.quantity) {
+        if (!userId || !foodId || !quantity) {
             return res.status(500).json({
                 success: 0,
                 message: 'All fields are required...'
             });
         }
 
-        getMenuItemById(foodId, (error, results) => {
+        getUserById(userId, (error, results) => {
             if (error) {
                 return res.status(400).json({
                     success: 0,
-                    message: 'Failed to retrieve menu item...'
+                    message: 'Failed to retrieve user...'
                 });
             } else if (!results) {
                 return res.status(500).json({
-                    success: 1,
-                    message: 'Menu item not found...'
+                    success: 0,
+                    message: 'No user found...'
                 });
             } else {
-                const amountPaid = results.price * quantity;
+                if (results.is_verified !== 1) {
+                    return res.status(500).json({
+                        success: 0,
+                        message: 'Email verification is required to proceed...'
+                    });
+                }
 
-                insertOrder({ amount_paid: amountPaid, user_id: userId }, (error, results) => {
+                getMenuItemById(foodId, (error, results) => {
                     if (error) {
                         return res.status(400).json({
                             success: 0,
-                            message: 'Failed to insert order...'
+                            message: 'Failed to retrieve menu item...'
+                        });
+                    } else if (!results) {
+                        return res.status(500).json({
+                            success: 1,
+                            message: 'Menu item not found...'
                         });
                     } else {
-                        const orderId = results.insertId;
+                        const amountPaid = results.price * quantity;
         
-                        insertOrderDetail({ order_id: orderId, food_id: foodId, quantity: quantity }, (error, results) => {
+                        insertOrder({ amount_paid: amountPaid, user_id: userId }, (error, results) => {
                             if (error) {
                                 return res.status(400).json({
                                     success: 0,
-                                    message: 'Failed to insert order details...'
+                                    message: 'Failed to insert order...'
                                 });
                             } else {
-                                getMenuItemById(foodId, (error, results) => {
+                                const orderId = results.insertId;
+                
+                                insertOrderDetail({ order_id: orderId, food_id: foodId, quantity: quantity }, (error, results) => {
                                     if (error) {
                                         return res.status(400).json({
                                             success: 0,
-                                            message: 'Failed to retrieve menu item...'
+                                            message: 'Failed to insert order details...'
                                         });
                                     } else {
-                                        const balance = results.quantity - quantity;
-        
-                                        updateMenuItem({ food_id: foodId, quantity: balance }, (error, results) => {
+                                        getMenuItemById(foodId, (error, results) => {
                                             if (error) {
                                                 return res.status(400).json({
                                                     success: 0,
-                                                    message: 'Failed to update menu item...'
+                                                    message: 'Failed to retrieve menu item...'
                                                 });
                                             } else {
-                                                getOrderWithOrderDetails(orderId, (error, results) => {
+                                                const balance = results.quantity - quantity;
+                
+                                                updateMenuItem({ food_id: foodId, quantity: balance }, (error, results) => {
                                                     if (error) {
                                                         return res.status(400).json({
                                                             success: 0,
-                                                            message: 'Failed to retrieve order with oreder details...'
+                                                            message: 'Failed to update menu item...'
                                                         });
                                                     } else {
-                                                        return res.status(200).json({
-                                                            success: 1,
-                                                            data: results
+                                                        getOrderWithOrderDetails(orderId, (error, results) => {
+                                                            if (error) {
+                                                                return res.status(400).json({
+                                                                    success: 0,
+                                                                    message: 'Failed to retrieve order with oreder details...'
+                                                                });
+                                                            } else {
+                                                                return res.status(200).json({
+                                                                    success: 1,
+                                                                    data: results
+                                                                });
+                                                            }
                                                         });
                                                     }
                                                 });
@@ -150,9 +172,9 @@ module.exports = {
                             }
                         });
                     }
-                });
+                }); 
             }
-        }); 
+        });
     },
     updateOrder: (req, res) => {
         const body = req.body;

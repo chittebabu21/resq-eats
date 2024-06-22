@@ -6,6 +6,7 @@ const {
     updateVendorById,
     deleteVendorById 
 } = require('../services/vendors.service');
+const { getUserById } = require('../services/users.service');
 
 // controller module object
 module.exports = {
@@ -49,6 +50,7 @@ module.exports = {
     insertVendor: (req, res) => {
         // request body
         const body = req.body;
+        const userId = body.user_id;
 
         if (!body.vendor_name || !body.contact_no || !body.address) {
             return res.status(500).json({
@@ -57,20 +59,48 @@ module.exports = {
             });
         } 
 
-        // insert new user
-        insertVendor(body, (error, results) => {
-            if (error) {
-                return res.status(400).json({
-                    success: 0,
-                    message: 'Failed to insert vendor...'
-                });
-            } else {
-                return res.status(200).json({
-                    success: 1,
-                    message: 'Vendor created successfully!'
-                });
-            }
-        });
+        if (!userId) {
+            return res.status(500).json({
+                success: 0,
+                message: 'User ID is required...'
+            }); 
+        } else {
+            getUserById(userId, (error, results) => {
+                if (error) {
+                    return res.status(400).json({
+                        success: 0,
+                        message: 'Failed to retrieve user...'
+                    });
+                } else if (!results) {
+                    return res.status(500).json({
+                        success: 0,
+                        message: 'No user found...'
+                    });
+                } else {
+                    if (results.is_verified !== 1) {
+                        return res.status(500).json({
+                            success: 0,
+                            message: 'Email verification is required to proceed...'
+                        });
+                    }
+
+                    // insert new user
+                    insertVendor(body, (error, results) => {
+                        if (error) {
+                            return res.status(400).json({
+                                success: 0,
+                                message: 'Failed to insert vendor...'
+                            });
+                        } else {
+                            return res.status(200).json({
+                                success: 1,
+                                message: 'Vendor created successfully!'
+                            });
+                        }
+                    });
+                }
+            });
+        }
     },
     updateVendorById: (req, res) => {
         // get request body and image file
