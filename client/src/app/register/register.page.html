@@ -1,43 +1,47 @@
 <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
   <ion-list id="container">
-    <ion-item color="warning">
+    <ion-item>
       <ion-input
         labelPlacement="floating" 
         label="Username"
-        fill="solid"
+        fill="outline"
+        shape="round"
         clearInput="true"
         type="text"
         formControlName="username"
       ></ion-input>
     </ion-item>
   
-    <ion-item color="warning">
+    <ion-item>
       <ion-input
         labelPlacement="floating" 
         label="Email Address"
-        fill="solid"
+        fill="outline"
+        shape="round"
         clearInput="true"
         type="email"
         formControlName="email_address"
       ></ion-input>
     </ion-item>
   
-    <ion-item color="warning"> 
+    <ion-item> 
       <ion-input
         labelPlacement="floating" 
         label="Password"
-        fill="solid"
+        fill="outline"
+        shape="round"
         clearInput="true"
         type="password"
         formControlName="password_hash"
       ></ion-input>
     </ion-item>
   
-    <ion-item color="warning"> 
+    <ion-item> 
       <ion-input
         labelPlacement="floating" 
         label="Confirm Password"
-        fill="solid"
+        fill="outline"
+        shape="round"
         clearInput="true"
         type="password"
         formControlName="confirm_password"

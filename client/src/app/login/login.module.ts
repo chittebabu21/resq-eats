@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { GoogleSigninButtonModule } from '@abacritt/angularx-social-login';
+
 import { IonicModule } from '@ionic/angular';
 
 import { LoginPageRoutingModule } from './login-routing.module';
@@ -14,10 +16,14 @@ import { LoginPage } from './login.page';
     FormsModule,
     ReactiveFormsModule,
     IonicModule,
-    LoginPageRoutingModule
+    LoginPageRoutingModule,
+    GoogleSigninButtonModule
   ],
   declarations: [
     LoginPage
+  ],
+  providers: [
+   
   ]
 })
 export class LoginPageModule {}

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -12,18 +12,6 @@ export class AppComponent implements OnInit {
   constructor(private router: Router) {}
 
   ngOnInit(): void {
-    this.router.events.subscribe((event) => {
-      if (event instanceof NavigationEnd) {
-        this.updateBackgroundColor(event.urlAfterRedirects);
-      }
-    });
-  }
-
-  updateBackgroundColor(url: string) {
-    if (url === '/' || url === '/login' || url === '/register') {
-      this.backgroundColor = 'warning';
-    } else {
-      this.backgroundColor = 'light';
-    }
+    
   }
 }

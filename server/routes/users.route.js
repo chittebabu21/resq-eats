@@ -7,6 +7,7 @@ const {
     getUserById, 
     getUserByEmail, 
     insertUser, 
+    insertOAuthUser,
     updateUser, 
     deleteUserById, 
     login, 
@@ -18,15 +19,18 @@ const {
 
 // routes
 router.get('/', getAllUsers);
-router.get('/:id', userAuth, getUserById);
-router.get('/', getUserByEmail);
+router.get('/email-address', getUserByEmail);
+router.get('/:id', getUserById);
 router.get('/verify-email/:token', verifyEmail);
 router.post('/', insertUser);
+router.post('/oauth-user', insertOAuthUser);
 router.post('/login', login);
 router.post('/verify-email-request', sendVerificationLink);
 router.post('/reset-password-request', sendResetPasswordLink);
-router.put('/', userAuth, upload, updateUser);
 router.put('/update-password', updatePassword);
+
+// routes with middleware
+router.put('/', userAuth, upload, updateUser);
 router.delete('/:id', userAuth, deleteUserById);
 
 // export router module

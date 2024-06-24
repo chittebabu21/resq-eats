@@ -144,6 +144,34 @@ module.exports = {
             }
         });
     },
+    insertOAuthUser: (req, res) => {
+        const body = req.body;
+
+        if (!body.email_address) {
+            return res.status(500).json({
+                success: 0,
+                message: 'Email address is required...'
+            });
+        } 
+
+        insertUser(body, (error, results) => {
+            if (error) {
+                return res.status(400).json({
+                    success: 0,
+                    message: 'Failed to insert user...'
+                });
+            } else {
+                const token = jwt.sign({ email_address: body.email_address }, process.env.JWT_KEY, {
+                    expiresIn: '24h'
+                });
+
+                return res.status(200).json({
+                    success: 1,
+                    token: token
+                });
+            }
+        });
+    },
     updateUser: (req, res) => {
         // get request body 
         const body = req.body;
