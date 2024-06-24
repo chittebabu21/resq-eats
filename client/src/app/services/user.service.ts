@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { catchError, of, throwError } from 'rxjs';
+import { Observable, catchError, map, of, throwError } from 'rxjs';
+import { User } from '../interfaces/user';
 
 @Injectable({
   providedIn: 'root'
@@ -11,12 +12,32 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  getAllUsers() {
-    return this.http.get(this.userUrl);
+  getAllUsers(): Observable<User[]> {
+    return this.http.get<User[]>(this.userUrl).pipe(
+      map(users => users.map(user => {
+        user.createdOn = new Date(user.createdOn);
+
+        if (user.isVerified !== 0 && user.isVerified !== 1) {
+          throw new Error('Invalid value for isVerified field...');
+        }
+
+        return user;
+      }))
+    );
   }
 
-  getUserById(id: number) {
-    return this.http.get(`${this.userUrl}/${id}`);
+  getUserById(id: number): Observable<User> {
+    return this.http.get<User>(`${this.userUrl}/${id}`).pipe(
+      map(user => {
+        user.createdOn = new Date(user.createdOn);
+
+        if (user.isVerified !== 0 && user.isVerified !== 1) {
+          throw new Error('Invalid value for isVerified field...');
+        }
+
+        return user;
+      }) 
+    );
   }
 
   getUserByEmail(email: string) {
@@ -90,6 +111,10 @@ export class UserService {
     };
 
     return this.http.post(`${this.userUrl}/verify-email-request`, payload, { headers: headers });
+  }
+
+  logout() {
+    localStorage.clear();
   }
 
   set(key: string, value: any) {
