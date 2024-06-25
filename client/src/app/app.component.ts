@@ -10,8 +10,7 @@ import { UserService } from './services/user.service';
 })
 export class AppComponent implements OnInit {
   backgroundColor: string = 'light';
-  isLoggedIn = false;
-  // showTabs = true;
+  showTabs = false;
 
   constructor(private router: Router, private userService: UserService) {
     
@@ -24,13 +23,20 @@ export class AppComponent implements OnInit {
       next: (event: any) => {
         const navigationEndEvent = event as NavigationEnd;
         console.log(navigationEndEvent);
-        if (navigationEndEvent.url === '/' || navigationEndEvent.url === '/login' || navigationEndEvent.url === '/register') {
-          this.isLoggedIn = false;
-        } else {
-          this.isLoggedIn = true;
-        }
-        // this.showTabs = !['/', '/login'].includes(navigationEndEvent.urlAfterRedirects);
+        
+        this.updateTabsVisibility(navigationEndEvent.urlAfterRedirects);
       }
     });
+
+    console.log(this.router.url);
+    this.updateTabsVisibility(this.router.url);
+  }
+
+  private updateTabsVisibility(url: string) {
+    if (url === '/' || url === '/login' || url === '/register') {
+      this.showTabs = false;
+    } else {
+      this.showTabs = true;
+    }
   }
 }

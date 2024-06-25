@@ -3,6 +3,6 @@
   <ion-content [fullscreen]="true" [color]="backgroundColor" padding>
     <app-sub-header></app-sub-header>
     <ion-router-outlet></ion-router-outlet>
-    <app-tabs [isLoggedIn]="isLoggedIn"></app-tabs>
+    <app-tabs *ngIf="showTabs"></app-tabs>
   </ion-content>
 </ion-app>
