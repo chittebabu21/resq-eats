@@ -22,13 +22,11 @@ export class AppComponent implements OnInit {
     ).subscribe({
       next: (event: any) => {
         const navigationEndEvent = event as NavigationEnd;
-        console.log(navigationEndEvent);
         
         this.updateTabsVisibility(navigationEndEvent.urlAfterRedirects);
       }
     });
-
-    console.log(this.router.url);
+    
     this.updateTabsVisibility(this.router.url);
   }
 

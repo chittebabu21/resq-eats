@@ -4,6 +4,7 @@
 
 export const environment = {
   production: false,
+  baseUrl: 'http://localhost:4000',
   userUrl: 'http://localhost:4000/users',
   vendorUrl: 'http://localhost:4000/vendors',
   adminUrl: 'http://localhost:4000/admins',
