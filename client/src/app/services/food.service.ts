@@ -17,7 +17,7 @@ export class FoodService {
     return this.http.get<{ success: number; data: Food[] }>(this.menuUrl).pipe(
       map(res => res.data.map((item) => {
         console.log(item);
-        item.image_url = `${this.baseUrl}/${item.image_url}` || null;
+        item.image_url = `${this.baseUrl}/uploads/${item.image_url}` || null;
         item.created_on = new Date(item.created_on);
         return item;
       })),
