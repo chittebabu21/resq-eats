@@ -1,10 +1,10 @@
 import { User } from "./user";
 
 export interface Vendor {
-    vendorId: number,
-    vendorName: string,
-    contactNo: string,
+    vendor_id: number,
+    vendor_name: string,
+    contact_no: string,
     address: string,
-    imageUrl?: string,
-    userId: User
+    image_url?: string,
+    user_id: User
 }

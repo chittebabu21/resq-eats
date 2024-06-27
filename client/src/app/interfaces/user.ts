@@ -1,10 +1,10 @@
 export interface User {
-    userId: number,
+    user_id: number,
     username: string,
-    emailAddress: string,
-    passwordHash: string,
-    imageUrl?: string,
-    verificationToken?: string,
-    isVerified: 0 | 1,
-    createdOn: Date
+    email_address: string,
+    password_hash: string,
+    image_url: string | null,
+    verification_token?: string,
+    is_verified: 0 | 1,
+    created_on: Date
 }
