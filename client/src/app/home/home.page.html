@@ -42,15 +42,29 @@
 
   <ion-item>
     <ion-list class="card-list">  
-      <ion-item color="light" button lines="none" *ngFor="let item of food">
+      <ion-item 
+        color="light" 
+        button
+        lines="none" 
+        *ngFor="let item of food" 
+        [routerLink]="['/', 'home', 'food-detail']">
         <ion-card>
-          <ion-img [src]="item.image_url" [alt]="item.food_name" ></ion-img>
+          <ion-img [src]="item.image_url" [alt]="item.food_name"></ion-img>
           <ion-card-header color="light">
-            <ion-card-title>{{ item.food_name }}</ion-card-title>
+            <ion-card-title>{{ item.food_name | uppercase }}</ion-card-title>
             <ion-card-subtitle>{{ item.vendor_id }}</ion-card-subtitle>
           </ion-card-header>
           <ion-card-content>
-            <ion-text>{{ item.price }}</ion-text>
+            <div class="content">
+              <ion-text>{{ item.price | currency }}</ion-text>
+              <ion-button
+                fill="clear"
+                color="primary"
+                slot="end"
+                class="details-btn"
+                [routerLink]="['/', 'home', 'food-detail']"
+              >MORE</ion-button>
+            </div>
           </ion-card-content>
         </ion-card>
       </ion-item>

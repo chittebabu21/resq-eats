@@ -15,9 +15,9 @@ export class UserService {
   getAllUsers(): Observable<User[]> {
     return this.http.get<User[]>(this.userUrl).pipe(
       map(users => users.map(user => {
-        user.createdOn = new Date(user.createdOn);
+        user.created_on = new Date(user.created_on);
 
-        if (user.isVerified !== 0 && user.isVerified !== 1) {
+        if (user.is_verified !== 0 && user.is_verified !== 1) {
           throw new Error('Invalid value for isVerified field...');
         }
 
@@ -29,9 +29,9 @@ export class UserService {
   getUserById(id: number): Observable<User> {
     return this.http.get<User>(`${this.userUrl}/${id}`).pipe(
       map(user => {
-        user.createdOn = new Date(user.createdOn);
+        user.created_on = new Date(user.created_on);
 
-        if (user.isVerified !== 0 && user.isVerified !== 1) {
+        if (user.is_verified !== 0 && user.is_verified !== 1) {
           throw new Error('Invalid value for isVerified field...');
         }
 

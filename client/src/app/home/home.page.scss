@@ -13,3 +13,12 @@
   overflow-y: auto;
   max-height: calc(100vh - 350px);
 }
+
+.content {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.details-btn {
+  margin-left: auto;
+}

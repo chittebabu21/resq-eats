@@ -10,6 +10,10 @@ const routes: Routes = [
   {
     path: 'map',
     loadChildren: () => import('./map/map.module').then( m => m.MapPageModule)
+  },
+  {
+    path: 'food-detail',
+    loadChildren: () => import('./food-detail/food-detail.module').then( m => m.FoodDetailPageModule)
   }
 ];
 

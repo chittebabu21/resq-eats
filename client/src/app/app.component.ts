@@ -12,7 +12,7 @@ export class AppComponent implements OnInit {
   backgroundColor: string = 'light';
   showTabs = false;
 
-  constructor(private router: Router, private userService: UserService) {
+  constructor(private router: Router) {
     
   }
 
