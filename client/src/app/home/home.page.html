@@ -47,12 +47,13 @@
         button
         lines="none" 
         *ngFor="let item of food" 
-        [routerLink]="['/', 'home', 'food-detail']">
+        (click)="navigateToFoodDetail(item.food_id)"
+      >
         <ion-card>
           <ion-img [src]="item.image_url" [alt]="item.food_name"></ion-img>
           <ion-card-header color="light">
             <ion-card-title>{{ item.food_name | uppercase }}</ion-card-title>
-            <ion-card-subtitle>{{ item.vendor_id }}</ion-card-subtitle>
+            <ion-card-subtitle>{{ vendorNames[item.vendor_id] }}</ion-card-subtitle>
           </ion-card-header>
           <ion-card-content>
             <div class="content">
@@ -62,7 +63,7 @@
                 color="primary"
                 slot="end"
                 class="details-btn"
-                [routerLink]="['/', 'home', 'food-detail']"
+                (click)="navigateToFoodDetail(item.food_id)"
               >MORE</ion-button>
             </div>
           </ion-card-content>

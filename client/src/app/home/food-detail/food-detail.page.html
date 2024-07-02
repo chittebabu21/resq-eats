@@ -1,12 +1,18 @@
-<ion-grid id="container">
+<ion-grid id="container" *ngIf="food">
   <ion-row>
     <ion-buttons>
       <ion-back-button defaultHref="/home"></ion-back-button>
     </ion-buttons>
   </ion-row>
   <ion-row>
-    <ion-col>
-      <p>Food Detail</p>
+    <ion-col offset="1">
+      <ion-text color="primary">{{ food.food_name | uppercase }}</ion-text>
+      <ion-img [src]="food.image_url"></ion-img>
+      <div class="vendor-details">
+        <ion-text color="primary">{{ vendorName }}</ion-text>
+        <ion-text color="primary">{{ contactNumber }}</ion-text>
+        <ion-text color="primary">{{ address }}</ion-text>
+      </div>
     </ion-col>
   </ion-row>
 </ion-grid>

@@ -23,4 +23,24 @@ export class FoodService {
       map(food => food.sort((a, b) => b.created_on.getTime() - a.created_on.getTime()))
     );
   }
+
+  getFoodById(id: number): Observable<Food> {
+    return this.http.get<{ success: number; data: Food }>(`${this.menuUrl}/${id}`).pipe(
+      map(res => {
+        res.data.image_url = `${this.baseUrl}/uploads/${res.data.image_url}` || null;
+        res.data.created_on = new Date(res.data.created_on);
+        return res.data;
+      })
+    );
+  }
+
+  getFoodByVendorId(id: number): Observable<any> {
+    return this.http.get<{ success: number; data: any }>(`${this.menuUrl}/vendor/${id}`).pipe(
+      map(res => {
+        res.data.image_url = `${this.baseUrl}/uploads/${res.data.image_url}` || null;
+        res.data.created_on = new Date(res.data.created_on);
+        return res.data;
+      })
+    );
+  }
 }

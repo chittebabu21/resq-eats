@@ -12,7 +12,7 @@ const routes: Routes = [
     loadChildren: () => import('./map/map.module').then( m => m.MapPageModule)
   },
   {
-    path: 'food-detail',
+    path: 'food-detail/:foodId',
     loadChildren: () => import('./food-detail/food-detail.module').then( m => m.FoodDetailPageModule)
   }
 ];
