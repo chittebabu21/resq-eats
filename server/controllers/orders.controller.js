@@ -2,6 +2,7 @@
 const {
     getAllOrders,
     getOrderById,
+    getOrdersByUserId,
     getOrderWithOrderDetails,
     insertOrder,
     updateOrder,
@@ -50,6 +51,28 @@ module.exports = {
             }
         });
     }, 
+    getOrdersByUserId: (req, res) => {
+        const id = req.params.id;
+
+        getOrdersByUserId(id, (error, results) => {
+            if (error) {
+                return res.status(400).json({
+                    success: 0,
+                    message: 'Failed to retrieve order by user id...'
+                });
+            } else if (!results) {
+                return res.status(500).json({
+                    success: 0,
+                    message: 'No order found by user id...'
+                });
+            } else {
+                return res.status(200).json({
+                    success: 1, 
+                    data: results
+                });
+            }
+        });
+    },
     getOrderWithOrderDetails: (req, res) => {
         const id = req.params.id;
 
@@ -57,12 +80,12 @@ module.exports = {
             if (error) {
                 return res.status(400).json({
                     success: 0,
-                    message: 'Failed to retrieve order with oreder details...'
+                    message: 'Failed to retrieve order with order details...'
                 });
             } else if (!results) {
                 return res.status(500).json({
                     success: 0,
-                    message: 'Failed to retrieve order with order details...'
+                    message: 'No order with order details found...'
                 });
             } else {
                 return res.status(200).json({

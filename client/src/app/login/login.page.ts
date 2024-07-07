@@ -105,10 +105,12 @@ export class LoginPage implements OnInit {
         .subscribe({
           next: (response: any) => {
             const jsonResponse = response as any;
+            console.log(jsonResponse);
             this.errorMsg = '';
 
             // save token to local storage
             this.userService.set('token', jsonResponse.token);
+            this.userService.set('userId', jsonResponse.user);
             this.isLoggedIn = true;
 
             this.showSuccessAlert();

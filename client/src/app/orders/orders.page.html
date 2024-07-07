@@ -1,3 +1,27 @@
-<ion-content [fullscreen]="true" color="light">
-  <p>orders</p>
-</ion-content>
+<ion-accordion-group class="container" *ngIf="hasOrders" #accordionGroup>
+  <ion-accordion *ngFor="let order of orders">
+    <ion-item slot="header" color="light">
+      <ion-text>
+        Amount Paid: {{ order.amount_paid | currency }}<br>
+        Order Status: {{ order.order_status }}<br>
+        Ordered On: {{ order.ordered_on | date }}<br>
+      </ion-text>
+    </ion-item>
+  </ion-accordion>
+</ion-accordion-group>
+
+<ion-grid class="container" *ngIf="!hasOrders">
+  <ion-row>
+    <ion-col>
+      <ion-button fill="clear" size="large" (click)="onRefresh()">
+        <ion-icon slot="icon-only" name="refresh-outline"></ion-icon>
+      </ion-button>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col>
+      <ion-text>No orders to show. Refresh and try again.</ion-text>
+    </ion-col>
+  </ion-row>
+</ion-grid>

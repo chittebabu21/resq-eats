@@ -239,25 +239,40 @@ module.exports = {
         // get request body
         const body = req.body;
 
-        verifyPassword(body.email_address, body.password_hash, (error, passwordMatch) => {
+        getUserByEmail(body.email_address, (error, results) => {
             if (error) {
                 return res.status(400).json({
-                    success: 0,
-                    message: 'Failed to verify user...'
+                    success: 0, 
+                    message: 'Failed to retrieve user...'
                 });
-            } else if (!passwordMatch) {
+            } else if (!results) {
                 return res.status(500).json({
-                    success: 0,
-                    message: 'Invalid email address or password...'
+                    success: 1,
+                    message: 'No user found...'
                 });
             } else {
-                const token = jwt.sign(body, process.env.JWT_KEY, {
-                    expiresIn: '24h'
-                });
-
-                return res.status(200).json({
-                    success: 1,
-                    token: token
+                verifyPassword(body.email_address, body.password_hash, (error, passwordMatch) => {
+                    if (error) {
+                        return res.status(400).json({
+                            success: 0,
+                            message: 'Failed to verify user...'
+                        });
+                    } else if (!passwordMatch) {
+                        return res.status(500).json({
+                            success: 0,
+                            message: 'Invalid email address or password...'
+                        });
+                    } else {
+                        const token = jwt.sign(body, process.env.JWT_KEY, {
+                            expiresIn: '24h'
+                        });
+        
+                        return res.status(200).json({
+                            success: 1,
+                            user: results.user_id,
+                            token: token
+                        });
+                    }
                 });
             }
         });

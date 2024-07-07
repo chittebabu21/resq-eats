@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 
 import { FoodService } from '../services/food.service';
@@ -17,7 +16,6 @@ export class HomePage implements OnInit {
   vendorNames: { [key: number]: string } = {};
 
   constructor(
-    private router: Router,
     private navCtrl: NavController,
     private foodService: FoodService
   ) {}
@@ -30,14 +28,14 @@ export class HomePage implements OnInit {
     this.fillList = 'solid';
     this.fillMap = 'outline';
 
-    this.router.navigateByUrl('/home');
+    this.navCtrl.navigateBack('/home');
   }
 
   onMapClick() {
     this.fillList = 'outline';
     this.fillMap = 'solid';
 
-    this.router.navigateByUrl('/home/map');
+    this.navCtrl.navigateForward('/home/map');
   }
 
   getAllFood() {

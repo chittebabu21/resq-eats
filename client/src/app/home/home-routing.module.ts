@@ -8,6 +8,11 @@ const routes: Routes = [
     component: HomePage,
   },
   {
+    path: '',
+    redirectTo: '/home',
+    pathMatch: 'full'
+  },
+  {
     path: 'map',
     loadChildren: () => import('./map/map.module').then( m => m.MapPageModule)
   },

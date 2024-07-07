@@ -5,14 +5,20 @@
     </ion-buttons>
   </ion-row>
   <ion-row>
-    <ion-col offset="1">
+    <ion-col>
       <ion-text color="primary">{{ food.food_name | uppercase }}</ion-text>
-      <ion-img [src]="food.image_url"></ion-img>
+      <ion-img [src]="food.image_url" [alt]="food.food_name"></ion-img>
       <div class="vendor-details">
         <ion-text color="primary">{{ vendorName }}</ion-text>
         <ion-text color="primary">{{ contactNumber }}</ion-text>
         <ion-text color="primary">{{ address }}</ion-text>
       </div>
+
+      <ion-button
+        fill="outline"
+        color="secondary"
+        shape="round"
+      >ORDER</ion-button>
     </ion-col>
   </ion-row>
 </ion-grid>
