@@ -6,6 +6,24 @@ const routes: Routes = [
   {
     path: '',
     component: HomePage,
+    children: [
+      {
+        path: 'main',
+        loadChildren: () => import('./main/main.module').then( m => m.MainPageModule)
+      },
+      {
+        path: 'favourites',
+        loadChildren: () => import('./favourites/favourites.module').then( m => m.FavouritesPageModule)
+      },
+      {
+        path: 'orders',
+        loadChildren: () => import('./orders/orders.module').then( m => m.OrdersPageModule)
+      },
+      {
+        path: 'account',
+        loadChildren: () => import('./account/account.module').then( m => m.AccountPageModule)
+      }
+    ]
   },
   {
     path: 'map',

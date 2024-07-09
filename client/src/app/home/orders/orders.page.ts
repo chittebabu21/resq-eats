@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IonAccordionGroup } from '@ionic/angular';
 
-import { Order } from '../interfaces/order';
-import { OrderService } from '../services/order.service';
+import { Order } from '../../interfaces/order';
+import { OrderService } from '../../services/order.service';
 
 @Component({
   selector: 'app-orders',

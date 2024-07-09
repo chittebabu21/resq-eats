@@ -5,18 +5,18 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { SharedModule } from 'src/app/shared/shared.module';
 
-import { MapPageRoutingModule } from './map-routing.module';
+import { MainPageRoutingModule } from './main-routing.module';
 
-import { MapPage } from './map.page';
+import { MainPage } from './main.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    MapPageRoutingModule,
+    MainPageRoutingModule,
     SharedModule
   ],
-  declarations: [MapPage]
+  declarations: [MainPage]
 })
-export class MapPageModule {}
+export class MainPageModule {}

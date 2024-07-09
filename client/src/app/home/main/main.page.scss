@@ -1,0 +1,23 @@
+#container {
+  text-align: center;
+  padding-bottom: 20px;
+  margin: 10px 0;
+}
+
+.toggle-btn {
+  padding: 10px 25px;
+}
+
+.card-list {
+  overflow-y: auto;
+  max-height: calc(100vh - 350px);
+}
+
+.content {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.details-btn {
+  margin-left: auto;
+}

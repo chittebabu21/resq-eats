@@ -67,7 +67,7 @@ export class LoginPage implements OnInit {
                   this.loginForm.reset();
 
                   setTimeout(() => {
-                    this.router.navigateByUrl('/home');
+                    this.router.navigateByUrl('/home/main');
                   }, 5000);
                 },
                 error: (error) => {
@@ -117,7 +117,7 @@ export class LoginPage implements OnInit {
             this.loginForm.reset();
 
             setTimeout(() => {
-              this.router.navigateByUrl('/home');
+              this.router.navigateByUrl('/home/main');
             }, 5000);
           },
           error: (error) => {
@@ -135,7 +135,7 @@ export class LoginPage implements OnInit {
       buttons: [{
         text: 'OK',
         handler: () => {
-          this.router.navigateByUrl('/home');
+          this.router.navigateByUrl('/home/main');
         }
       }]
     });
@@ -144,6 +144,6 @@ export class LoginPage implements OnInit {
 
     setTimeout(() => {
       successAlert.dismiss();
-    }, 5000);
+    }, 3000);
   }
 }

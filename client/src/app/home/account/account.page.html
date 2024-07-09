@@ -3,13 +3,13 @@
 <ion-content [fullscreen]="true" color="light">
   <ion-grid id="container">
     <ion-row>
-      <ion-buttons>
-        <ion-back-button defaultHref="/home/main"></ion-back-button>
-      </ion-buttons>
-    </ion-row>
-    <ion-row>
       <ion-col>
-        <ion-text>Map</ion-text>
+        <ion-button
+          fill="outline"
+          size="large"
+          shape="round"
+          (click)="logout()"
+        >LOGOUT</ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>

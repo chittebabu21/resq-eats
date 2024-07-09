@@ -1,10 +1,10 @@
 <app-header></app-header>
 
-<ion-content>
+<ion-content [fullscreen]="true" color="light">
   <ion-grid id="container" *ngIf="food">
     <ion-row>
       <ion-buttons>
-        <ion-back-button defaultHref="/home"></ion-back-button>
+        <ion-back-button defaultHref="/home/main"></ion-back-button>
       </ion-buttons>
     </ion-row>
     <ion-row>
@@ -21,10 +21,9 @@
           fill="outline"
           color="secondary"
           shape="round"
+          (click)="onOrder()"
         >ORDER</ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>
 </ion-content>
-
-<app-tabs></app-tabs>

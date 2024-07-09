@@ -52,4 +52,7 @@ export class FoodDetailPage implements OnInit {
     });
   }
 
+  onOrder() {
+    console.log('Order button clicked');
+  }
 }

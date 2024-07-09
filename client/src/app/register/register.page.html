@@ -1,6 +1,6 @@
 <app-header></app-header>
 
-<ion-content>
+<ion-content [fullscreen]="true" color="light">
   <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
     <ion-list id="container">
       <ion-item>
