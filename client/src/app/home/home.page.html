@@ -1,74 +1,79 @@
-<ion-list id="container">
-  <ion-item>
-    <ion-button 
-        shape="round" 
-        color="danger" 
-        class="toggle-btn"
-        size="medium"
-        slot="start"
-        [fill]="fillList"
-        (click)="onListClick()"
-      >List</ion-button>
+<app-header></app-header>
+
+<ion-content>
+
+  <ion-list id="container">
+    <ion-item>
       <ion-button 
-        shape="round" 
-        color="danger" 
-        class="toggle-btn"
-        size="medium"
-        slot="end"
-        [fill]="fillMap"
-        (click)="onMapClick()"
-      >Map</ion-button>
-  </ion-item>
-
-  <ion-item> 
-    <ion-input 
-      labelPlacement="floating" 
-      placeholder="Search..." 
-      fill="outline"
-      clearInput="true"
-      shape="round"
-    >
-      <ion-button fill="clear" slot="end" size="large"> 
-        <ion-icon slot="icon-only" name="search-outline"></ion-icon>
-      </ion-button>
-    </ion-input>
-  </ion-item>
-
-  <ion-item color="light">
-    <ion-button fill="clear" slot="end" shape="round" size="large">
-      <ion-icon name="filter-outline"></ion-icon>
-    </ion-button>
-  </ion-item>
-
-  <ion-item>
-    <ion-list class="card-list">  
-      <ion-item 
-        color="light" 
-        button
-        lines="none" 
-        *ngFor="let item of food" 
-        (click)="navigateToFoodDetail(item.food_id)"
+          shape="round" 
+          color="danger" 
+          class="toggle-btn"
+          size="medium"
+          slot="start"
+          [fill]="fillList"
+          (click)="onListClick()"
+        >List</ion-button>
+        <ion-button 
+          shape="round" 
+          color="danger" 
+          class="toggle-btn"
+          size="medium"
+          slot="end"
+          [fill]="fillMap"
+          (click)="onMapClick()"
+        >Map</ion-button>
+    </ion-item>
+  
+    <ion-item> 
+      <ion-input 
+        labelPlacement="floating" 
+        placeholder="Search..." 
+        fill="outline"
+        clearInput="true"
+        shape="round"
       >
-        <ion-card>
-          <ion-img [src]="item.image_url" [alt]="item.food_name"></ion-img>
-          <ion-card-header color="light">
-            <ion-card-title>{{ item.food_name | uppercase }}</ion-card-title>
-            <ion-card-subtitle>{{ vendorNames[item.vendor_id] }}</ion-card-subtitle>
-          </ion-card-header>
-          <ion-card-content>
-            <div class="content">
-              <ion-text>{{ item.price | currency }}</ion-text>
-              <ion-button
-                fill="clear"
-                color="primary"
-                slot="end"
-                class="details-btn"
-                (click)="navigateToFoodDetail(item.food_id)"
-              >MORE</ion-button>
-            </div>
-          </ion-card-content>
-        </ion-card>
-      </ion-item>
-    </ion-list>
-  </ion-item>
-</ion-list>
+        <ion-button fill="clear" slot="end" size="large"> 
+          <ion-icon slot="icon-only" name="search-outline"></ion-icon>
+        </ion-button>
+      </ion-input>
+    </ion-item>
+  
+    <ion-item color="light">
+      <ion-button fill="clear" slot="end" shape="round" size="large">
+        <ion-icon name="filter-outline"></ion-icon>
+      </ion-button>
+    </ion-item>
+  
+    <ion-item>
+      <ion-list class="card-list">  
+        <ion-item 
+          color="light" 
+          button
+          lines="none" 
+          *ngFor="let item of food" 
+          (click)="navigateToFoodDetail(item.food_id)"
+        >
+          <ion-card>
+            <ion-img [src]="item.image_url" [alt]="item.food_name"></ion-img>
+            <ion-card-header color="light">
+              <ion-card-title>{{ item.food_name | uppercase }}</ion-card-title>
+              <ion-card-subtitle>{{ vendorNames[item.vendor_id] }}</ion-card-subtitle>
+            </ion-card-header>
+            <ion-card-content>
+              <div class="content">
+                <ion-text>{{ item.price | currency }}</ion-text>
+                <ion-button
+                  fill="clear"
+                  color="primary"
+                  slot="end"
+                  class="details-btn"
+                  (click)="navigateToFoodDetail(item.food_id)"
+                >MORE</ion-button>
+              </div>
+            </ion-card-content>
+          </ion-card>
+        </ion-item>
+      </ion-list>
+    </ion-item>
+  </ion-list>
+</ion-content>

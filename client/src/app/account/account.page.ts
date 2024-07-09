@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { NavController } from '@ionic/angular';
+
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-account',
@@ -7,9 +10,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AccountPage implements OnInit {
 
-  constructor() { }
+  constructor(private navCtrl: NavController, private userService: UserService) { }
 
   ngOnInit() {
   }
 
+  logout() {
+    this.userService.logout();
+    this.navCtrl.navigateBack('/');
+  }
 }

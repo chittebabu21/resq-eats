@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { GoogleSigninButtonModule } from '@abacritt/angularx-social-login';
 
 import { IonicModule } from '@ionic/angular';
+import { SharedModule } from '../shared/shared.module';
 
 import { LoginPageRoutingModule } from './login-routing.module';
 
@@ -17,7 +18,8 @@ import { LoginPage } from './login.page';
     ReactiveFormsModule,
     IonicModule,
     LoginPageRoutingModule,
-    GoogleSigninButtonModule
+    GoogleSigninButtonModule,
+    SharedModule
   ],
   declarations: [
     LoginPage

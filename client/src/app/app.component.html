@@ -1,8 +1,4 @@
 <ion-app>
-  <app-header></app-header>
-  <ion-content [fullscreen]="true" [color]="backgroundColor" padding>
-    <app-sub-header></app-sub-header>
-    <ion-router-outlet></ion-router-outlet>
-    <app-tabs *ngIf="showTabs"></app-tabs>
-  </ion-content>
+  <ion-router-outlet></ion-router-outlet>
+  <app-tabs *ngIf="showTabs"></app-tabs>
 </ion-app>

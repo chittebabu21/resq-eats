@@ -7,26 +7,22 @@ import { GoogleLoginProvider } from '@abacritt/angularx-social-login';
 import { provideHttpClient } from '@angular/common/http';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
+import { SharedModule } from './shared/shared.module';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
-import { HeaderComponent } from './components/header/header.component';
-import { TabsComponent } from './components/tabs/tabs.component';
-import { SubHeaderComponent } from './components/sub-header/sub-header.component';
 import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    HeaderComponent,
-    TabsComponent,
-    SubHeaderComponent
+    AppComponent
   ],
   imports: [
     BrowserModule, 
     IonicModule.forRoot(), 
-    AppRoutingModule
+    AppRoutingModule,
+    SharedModule
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, 

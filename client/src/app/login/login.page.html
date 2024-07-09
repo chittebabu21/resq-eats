@@ -1,76 +1,61 @@
-<form [formGroup]="loginForm" (ngSubmit)="onLogin()">
-  <ion-list id="container">
-    <ion-item>
-      <ion-input
-        labelPlacement="floating" 
-        label="Email Address"
-        fill="outline"
+<app-header></app-header>
+
+<ion-content>
+  <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+    <ion-list id="container">
+      <ion-item>
+        <ion-input
+          labelPlacement="floating" 
+          label="Email Address"
+          fill="outline"
+          shape="round"
+          clearInput="true"
+          type="email"
+          formControlName="email_address"
+        ></ion-input>
+      </ion-item>
+    
+      <ion-item> 
+        <ion-input
+          labelPlacement="floating" 
+          label="Password"
+          fill="outline"
+          shape="round"
+          clearInput="true"
+          type="password"
+          formControlName="password_hash"
+        >
+        </ion-input>
+      </ion-item>
+    
+      <p *ngIf=" errorMsg !== '' " class="error">{{ errorMsg }}</p>
+    
+      <ion-button
+        fill="solid"
+        color="success"
+        expand="block"
         shape="round"
-        clearInput="true"
-        type="email"
-        formControlName="email_address"
-      ></ion-input>
-    </ion-item>
-  
-    <ion-item> 
-      <ion-input
-        labelPlacement="floating" 
-        label="Password"
-        fill="outline"
-        shape="round"
-        clearInput="true"
-        type="password"
-        formControlName="password_hash"
+        type="submit"
+        [disabled]="loginForm.invalid"
       >
-      </ion-input>
-    </ion-item>
+        <ion-icon name="log-in-outline" slot="end"></ion-icon>
+      LOGIN</ion-button>
+    
+      <ion-text color="primary">OR</ion-text>
   
-    <p *ngIf=" errorMsg !== '' " class="error">{{ errorMsg }}</p>
+      <asl-google-signin-button 
+        type="standard"
+        theme="filled_blue"
+        text="signin_with"
+        size="large"
+        shape="pill"
+        logo_alignment="left" 
+        class="g-signin"
+      ></asl-google-signin-button>
   
-    <ion-button
-      fill="solid"
-      color="success"
-      expand="block"
-      shape="round"
-      type="submit"
-      [disabled]="loginForm.invalid"
-    >
-      <ion-icon name="log-in-outline" slot="end"></ion-icon>
-    LOGIN</ion-button>
-  
-    <ion-text color="primary">OR</ion-text>
-
-    <asl-google-signin-button 
-      type="standard"
-      theme="filled_blue"
-      text="signin_with"
-      size="large"
-      shape="pill"
-      logo_alignment="left" 
-      class="g-signin"
-    ></asl-google-signin-button>
-
-    <!-- <div id="g_id_onload"
-        data-client_id="791231929359-9f9gdbaefd4nlpnbk7q3m2r6o7dng0io.apps.googleusercontent.com"
-        data-context="signin"
-        data-ux_mode="popup"
-        data-login_uri="http://localhost:4000"
-        data-itp_support="true">
-    </div>
-
-    <div class="g_id_signin"
-        data-type="standard"
-        data-shape="rectangular"
-        data-theme="outline"
-        data-text="signin_with"
-        data-size="large"
-        data-shape="pill"
-        data-width="200"
-        data-logo_alignment="left">
-    </div> -->
-
-    <script src="https://accounts.google.com/gsi/client" async></script>
-  
-    <ion-text color="primary">Do not have an account? Sign up <a routerLink="/register">here.</a></ion-text>
-  </ion-list>
-</form>
+      <script src="https://accounts.google.com/gsi/client" async></script>
+    
+      <ion-text color="primary">Do not have an account? Sign up <a routerLink="/register">here.</a></ion-text>
+    </ion-list>
+  </form>
+</ion-content>
