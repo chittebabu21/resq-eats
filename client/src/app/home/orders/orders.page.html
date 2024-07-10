@@ -4,12 +4,18 @@
   <ion-accordion-group class="container" *ngIf="hasOrders" #accordionGroup>
     <ion-accordion *ngFor="let order of orders">
       <ion-item slot="header" color="light">
+        <ion-label>
+          {{ orderDetailsMap.get(order.order_id)?.food_name | uppercase }}<br>
+          <ion-text color="tertiary">Order ID: {{ order.order_id }}</ion-text>
+        </ion-label>
+      </ion-item>
+      <div class="ion-padding" slot="content">
         <ion-text>
           Amount Paid: {{ order.amount_paid | currency }}<br>
           Order Status: {{ order.order_status }}<br>
           Ordered On: {{ order.ordered_on | date }}<br>
         </ion-text>
-      </ion-item>
+      </div>
     </ion-accordion>
   </ion-accordion-group>
   

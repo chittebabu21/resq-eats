@@ -5,6 +5,8 @@ import { Observable, map } from 'rxjs';
 
 import { Order } from '../interfaces/order';
 import { User } from '../interfaces/user';
+import { Food } from '../interfaces/food';
+import { OrderDetails } from '../interfaces/order-details';
 
 @Injectable({
   providedIn: 'root'
@@ -32,7 +34,6 @@ export class OrderService {
     const token = localStorage.getItem('token');
     const cleanedToken = token?.replace(/^['"](.*)['"]$/, '$1');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${cleanedToken}`);
-    console.log(headers);
 
     return this.http.get<{ success: number; data: any }>(`${this.orderUrl}/user/${id}`, { headers: headers }).pipe(
       map(res => {
@@ -60,12 +61,39 @@ export class OrderService {
 
   getOrderWithDetails(id: number): Observable<any> {
     const token = localStorage.getItem('token');
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    const cleanedToken = token?.replace(/^['"](.*)['"]$/, '$1');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${cleanedToken}`);
 
     return this.http.get<{ success: number; data: any }>(`${this.orderUrl}/order-details/${id}`, { headers: headers }).pipe(
       map(res => {
         res.data.ordered_on = new Date(res.data.ordered_on);
         return res.data;
+      })
+    );
+  }
+
+  getOrderDetailsByFoodId(id: number): Observable<any> {
+    const token = localStorage.getItem('token');
+    const cleanedToken = token?.replace(/^['"](.*)['"]$/, '$1');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${cleanedToken}`);
+
+    return this.http.get<{ success: number; data: any }>(`${this.orderUrl}/order-details/menu/${id}`, { headers: headers }).pipe(
+      map(res => {
+        return res.data.map((order: any) => ({
+          order_detail_id: order.order_detail_id,
+          order_id: order.order_id,
+          food_id: order.food_id,
+          order_quantity: order.order_quantity,
+          food: {
+            food_id: order.food_id,
+            food_name: order.food_name,
+            price: order.price,
+            quantity: order.quantity,
+            image_url: `${this.baseUrl}/uploads/${order.image_url}` || null,
+            vendor_id: order.vendor_id,
+            created_on: new Date(order.created_on)
+          } as Food
+        }) as OrderDetails);
       })
     );
   }

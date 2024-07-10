@@ -8,7 +8,7 @@ const {
     updateOrder,
     deleteOrderById
 } = require('../services/orders.service');
-const { insertOrderDetail, deleteOrderDetailById } = require('../services/order_details.service');
+const { getOrderDetailsByFoodId, insertOrderDetail, deleteOrderDetailById } = require('../services/order_details.service');
 const { getMenuItemById, updateMenuItem } = require('../services/menu.service');
 const { getUserById } = require('../services/users.service');
 
@@ -86,6 +86,28 @@ module.exports = {
                 return res.status(500).json({
                     success: 0,
                     message: 'No order with order details found...'
+                });
+            } else {
+                return res.status(200).json({
+                    success: 1,
+                    data: results
+                });
+            }
+        });
+    },
+    getOrderDetailsByFoodId: (req, res) => {
+        const id = req.params.id;
+
+        getOrderDetailsByFoodId(id, (error, results) => {
+            if (error) {
+                return res.status(400).json({
+                    success: 0,
+                    message: 'Failed to retrieve order details...'
+                });
+            } else if (!results) {
+                return res.status(500).json({
+                    success: 0,
+                    message: 'No order details found...'
                 });
             } else {
                 return res.status(200).json({
