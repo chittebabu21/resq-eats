@@ -1,15 +1,55 @@
 <app-header></app-header>
 
 <ion-content [fullscreen]="true" color="light">
-  <ion-grid id="container">
+  <app-sub-header></app-sub-header>
+  <ion-grid id="container" *ngIf="isUser">
     <ion-row>
       <ion-col>
-        <ion-button
-          fill="outline"
-          size="large"
-          shape="round"
-          (click)="logout()"
-        >LOGOUT</ion-button>
+        <ion-item>
+          <ion-avatar slot="start">
+            <img *ngIf="!authUserImageUrl" [src]="user.image_url" alt="profile image">
+            <img *ngIf="authUserImageUrl" [src]="authUserImageUrl" alt="google profile image">
+          </ion-avatar>
+
+          <ion-text *ngIf="isVerified" color="success">Verified</ion-text>
+          <ion-text *ngIf="!isVerified" color="danger">Please check your email to verify your account</ion-text>
+        </ion-item>
+
+        <div class="details">
+          <p>Name: {{ user.username | uppercase }}</p>
+          <p>Email: {{ user.email_address }}</p>
+          <p>Joined: {{ user.created_on | date }}</p>
+          <ion-toggle 
+            aria-label="secondary" 
+            labelPlacement="end"
+            [checked]="false"
+            (ionChange)="onToggle()"
+          >Switch to vendor account</ion-toggle>
+
+          <ion-button
+            fill="outline"
+            size="medium"
+            shape="round"
+            (click)="logout()"
+          >LOGOUT</ion-button>
+        </div>
+        
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid class="container" *ngIf="!isUser">
+    <ion-row>
+      <ion-col>
+        <ion-button fill="clear" size="large" (click)="onRefresh()">
+          <ion-icon slot="icon-only" name="refresh-outline"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  
+    <ion-row>
+      <ion-col>
+        <ion-text>No data to show. Refresh and try again.</ion-text>
       </ion-col>
     </ion-row>
   </ion-grid>

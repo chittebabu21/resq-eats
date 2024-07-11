@@ -9,6 +9,7 @@ import { User } from '../interfaces/user';
 })
 export class UserService {
   private userUrl = environment.userUrl;
+  private baseUrl = environment.baseUrl;
 
   constructor(private http: HttpClient) { }
 
@@ -27,15 +28,16 @@ export class UserService {
   }
 
   getUserById(id: number): Observable<User> {
-    return this.http.get<User>(`${this.userUrl}/${id}`).pipe(
-      map(user => {
-        user.created_on = new Date(user.created_on);
+    return this.http.get<{ success: number; data: User }>(`${this.userUrl}/${id}`).pipe(
+      map(res => {
+        res.data.created_on = new Date(res.data.created_on);
+        res.data.image_url = `${this.baseUrl}/uploads/${res.data.image_url}` || null;
 
-        if (user.is_verified !== 0 && user.is_verified !== 1) {
+        if (res.data.is_verified !== 0 && res.data.is_verified !== 1) {
           throw new Error('Invalid value for isVerified field...');
         }
 
-        return user;
+        return res.data;
       }) 
     );
   }

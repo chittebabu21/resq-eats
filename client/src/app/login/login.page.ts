@@ -53,7 +53,8 @@ export class LoginPage implements OnInit {
                 username: username, 
                 email_address: emailAddress, 
                 password_hash: passwordHash, 
-                image_url: imageUrl
+                image_url: imageUrl,
+                is_verified: 1
               }).subscribe({
                 next: (response: any) => {
                   const jsonResponse = response as any;
