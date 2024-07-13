@@ -104,6 +104,6 @@ export class RegisterPage implements OnInit {
 
     setTimeout(() => {
       successAlert.dismiss();
-    }, 5000);
+    }, 3000);
   }
 }

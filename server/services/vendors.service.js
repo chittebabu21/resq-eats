@@ -21,6 +21,15 @@ module.exports = {
             }
         });
     },
+    getVendorByUserId: (id, callback) => {
+        pool.query('SELECT * FROM vendors INNER JOIN users ON vendors.user_id = users.user_id WHERE vendors.user_id = ?', [id], (error, results, fiedls) => {
+            if (error) {
+                return callback(error);
+            } else {
+                return callback(null, results[0]);
+            }
+        });
+    },
     insertVendor: (data, callback) => {
         pool.query('INSERT INTO vendors SET ?', [data], (error, results, fields) => {
             if (error) {

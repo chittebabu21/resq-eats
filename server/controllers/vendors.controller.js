@@ -2,6 +2,7 @@
 const { 
     getAllVendors,
     getVendorById,
+    getVendorByUserId,
     insertVendor,
     updateVendorById,
     deleteVendorById 
@@ -38,6 +39,29 @@ module.exports = {
                 return res.status(500).json({
                     success: 0,
                     message: 'vendor not found...'
+                });
+            } else {
+                return res.status(200).json({
+                    success: 1,
+                    data: results
+                });
+            }
+        });
+    },
+    getVendorByUserId: (req, res) => {
+        // get id from params
+        const id = req.params.id;
+
+        getVendorByUserId(id, (error, results) => {
+            if (error) {
+                return res.status(400).json({
+                    success: 0, 
+                    message: 'Failed to get vendor...'
+                });
+            } else if (!results) {
+                return res.status(500).json({
+                    success: 0,
+                    message: 'No vendor found'
                 });
             } else {
                 return res.status(200).json({

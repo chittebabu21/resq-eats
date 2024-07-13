@@ -9,6 +9,7 @@
           <ion-avatar slot="start">
             <img *ngIf="!authUserImageUrl" [src]="user.image_url" alt="profile image">
             <img *ngIf="authUserImageUrl" [src]="authUserImageUrl" alt="google profile image">
+            <img *ngIf="!authUserImageUrl && user.image_url === null" [src]="placeholderUser" alt="placeholder image">
           </ion-avatar>
 
           <ion-text *ngIf="isVerified" color="success">Verified</ion-text>
@@ -19,20 +20,35 @@
           <p>Name: {{ user.username | uppercase }}</p>
           <p>Email: {{ user.email_address }}</p>
           <p>Joined: {{ user.created_on | date }}</p>
-          <ion-toggle 
+
+          
+          <!-- <ion-toggle 
             aria-label="secondary" 
             labelPlacement="end"
             [checked]="false"
             (ionChange)="onToggle()"
-          >Switch to vendor account</ion-toggle>
+          >Switch to vendor account</ion-toggle> -->
 
-          <ion-button
-            fill="outline"
-            size="medium"
-            shape="round"
-            (click)="logout()"
-          >LOGOUT</ion-button>
         </div>
+
+        <ion-button
+          fill="outline"
+          size="medium"
+          shape="round"
+          color="tertiary"
+          (click)="onSwitchVendor()"
+        >
+          Switch to Vendor
+        </ion-button>
+        <br>
+
+        <ion-button
+          fill="outline"
+          size="medium"
+          shape="round"
+          color="primary"
+          (click)="logout()"
+        >LOGOUT</ion-button>
         
       </ion-col>
     </ion-row>

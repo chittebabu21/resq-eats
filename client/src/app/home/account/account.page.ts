@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
-import { ActivatedRoute, Router } from '@angular/router';
 
 import { UserService } from '../../services/user.service';
-import { User } from 'src/app/interfaces/user';
+import { User } from '../../interfaces/user';
 
 @Component({
   selector: 'app-account',
@@ -17,23 +16,15 @@ export class AccountPage implements OnInit {
   isVerified = false;
   authUserImageUrl!: string;
   checked = false;
+  placeholderUser = '/assets/placeholder-images/user.png';
 
   constructor(
     private navCtrl: NavController, 
-    private activatedRoute: ActivatedRoute, 
-    private router: Router,
     private userService: UserService
   ) { }
 
   ngOnInit() {
     this.getUserById();
-
-    this.activatedRoute.paramMap.subscribe(paramMap => {
-      if (this.router.url === '/home/account') {
-        this.checked = false;
-        console.log(paramMap);
-      }
-    });
   }
 
   getUserById() {
@@ -71,8 +62,7 @@ export class AccountPage implements OnInit {
     }
   }
 
-  onToggle() {
-    this.checked = true;
+  onSwitchVendor() {
     this.navCtrl.navigateForward('/home/vendor');
   }
 

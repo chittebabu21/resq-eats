@@ -5,6 +5,7 @@ export interface Vendor {
     vendor_name: string,
     contact_no: string,
     address: string,
-    image_url?: string,
-    user_id: User
+    vendor_image_url?: string,
+    user_id: number,
+    user?: User
 }

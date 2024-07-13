@@ -10,7 +10,26 @@
           <ion-back-button defaultHref="/home/account"></ion-back-button>
         </ion-buttons>
 
-        <p>Vendor</p>
+        <ion-spinner *ngIf="!isLoading"></ion-spinner>
+
+        <ion-card *ngIf="vendor" color="light">
+          <img *ngIf="vendorImageFile !== 'null'" [src]="vendor.vendor_image_url" [alt]="vendor.vendor_name">
+          <img *ngIf="vendorImageFile === 'null'" src="/assets/placeholder-images/food.png" alt="placeholder image">
+
+          <ion-card-header>
+            <ion-card-title>{{ vendor.vendor_name | titlecase }}</ion-card-title>
+            <ion-card-subtitle>{{ vendor.contact_no }}</ion-card-subtitle>
+          </ion-card-header>
+
+          <ion-card-content>
+            <ion-text color="tertiary">{{ vendor.address }}</ion-text>
+            <ion-button slot="end" fill="clear" color="secondary" (click)="onEdit()">
+              <ion-icon name="create-outline"></ion-icon>
+            </ion-button>
+          </ion-card-content>
+        </ion-card>
+
+        
       </ion-col>
     </ion-row>
   </ion-grid>

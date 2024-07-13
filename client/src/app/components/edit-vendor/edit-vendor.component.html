@@ -1,0 +1,24 @@
+<app-header></app-header>
+
+<ion-content [fullscreen]="true" color="light">
+  <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+    <ion-item>
+      <ion-label position="floating">Vendor Name</ion-label>
+      <ion-input type="text" formControlName="vendor_name"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Contact No</ion-label>
+      <ion-input type="text" formControlName="contact_no"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Address</ion-label>
+      <ion-input type="text" formControlName="address"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Image</ion-label>
+      <input type="file" (change)="onImagePicked($event)" accept="image/*">
+    </ion-item>
+    <!-- <img *ngIf="vendorImageFile" [src]="vendorImageFile" alt="Vendor Image"> -->
+    <ion-button expand="block" type="submit" [disabled]="editForm.invalid">Save</ion-button>
+  </form>
+</ion-content>
