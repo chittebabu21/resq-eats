@@ -1,7 +1,7 @@
 <app-header></app-header>
 
 <ion-content [fullscreen]="true" color="light">
-  <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="editForm" (ngSubmit)="onSubmit()" id="container">
     <ion-item>
       <ion-label position="floating">Vendor Name</ion-label>
       <ion-input type="text" formControlName="vendor_name"></ion-input>
@@ -19,6 +19,15 @@
       <input type="file" (change)="onImagePicked($event)" accept="image/*">
     </ion-item>
     <!-- <img *ngIf="vendorImageFile" [src]="vendorImageFile" alt="Vendor Image"> -->
-    <ion-button expand="block" type="submit" [disabled]="editForm.invalid">Save</ion-button>
+     <div class="btn-group">
+      <ion-button fill="outline" color="secondary" (click)="onCancel()">
+        CANCEL
+        <ion-icon slot="end" name="close-outline"></ion-icon>
+      </ion-button>
+      <ion-button type="submit" [disabled]="editForm.invalid">
+        SAVE
+        <ion-icon slot="end" name="save-outline"></ion-icon>
+      </ion-button>
+     </div>
   </form>
 </ion-content>

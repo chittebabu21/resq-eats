@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AlertController } from '@ionic/angular';
 import { NavController } from '@ionic/angular';
+import { ModalController } from '@ionic/angular';
 
 import { Vendor } from '../../interfaces/vendor';
 import { VendorService } from '../../services/vendor.service';
@@ -19,10 +20,26 @@ export class EditVendorComponent  implements OnInit {
   constructor(
     private vendorService: VendorService,
     private alertCtrl: AlertController,
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    private modalCtrl: ModalController
   ) { }
 
   ngOnInit() {
+    this.editForm = new FormGroup({
+      vendor_name: new FormControl('', {
+        updateOn: 'blur',
+        validators: [Validators.required]
+      }),
+      contact_no: new FormControl('', {
+        updateOn: 'blur',
+        validators: [Validators.required]
+      }),
+      address: new FormControl('', {
+        updateOn: 'blur',
+        validators: [Validators.required]
+      }),
+      vendor_image_url: new FormControl(null)
+    });
     this.getVendorByUserId();
   }
 
@@ -41,7 +58,7 @@ export class EditVendorComponent  implements OnInit {
             }
 
             this.vendor = vendor;
-            this.initializeForm(vendor);
+            this.updateForm(vendor);
           } else {
             console.log('No vendor details found...');
           }
@@ -53,28 +70,18 @@ export class EditVendorComponent  implements OnInit {
     }
   }
 
-  initializeForm(vendor: Vendor) {
-    this.editForm = new FormGroup({
-      vendor_name: new FormControl(vendor.vendor_name, {
-        updateOn: 'blur',
-        validators: [Validators.required]
-      }),
-      contact_no: new FormControl(vendor.contact_no, {
-        updateOn: 'blur',
-        validators: [Validators.required]
-      }),
-      address: new FormControl(vendor.address, {
-        updateOn: 'blur',
-        validators: [Validators.required]
-      }),
-      vendor_image_url: new FormControl(null)
+  updateForm(vendor: Vendor) {
+    this.editForm.patchValue({
+      vendor_name: vendor.vendor_name,
+      contact_no: vendor.contact_no,
+      address: vendor.address
     });
   }
 
   onImagePicked(event: Event) {
     const file = (event.target as HTMLInputElement).files![0];
     this.editForm.patchValue({ vendor_image_url: file });
-    this.editForm.get('vendor_image_url')?.updateValueAndValidity();
+    this.editForm.value.vendor_image_url.updateValueAndValidity();
 
     const reader = new FileReader();
     reader.onload = () => {
@@ -89,12 +96,12 @@ export class EditVendorComponent  implements OnInit {
     }
 
     const vendorData = new FormData();
-    vendorData.append('vendor_name', this.editForm.get('vendor_name')?.value);
-    vendorData.append('contact_no', this.editForm.get('contact_no')?.value);
-    vendorData.append('address', this.editForm.get('address')?.value);
+    vendorData.append('vendor_name', this.editForm.value.vendor_name);
+    vendorData.append('contact_no', this.editForm.value.contact_no);
+    vendorData.append('address', this.editForm.value.address);
 
-    if (this.editForm.get('vendor_image_url')?.value) {
-      vendorData.append('vendor_image_url', this.editForm.get('vendor_image_url')?.value);
+    if (this.editForm.value.vendor_image_url) {
+      vendorData.append('vendor_image_url', this.editForm.value.vendor_image_url);
     }
 
     // call service update method
@@ -126,6 +133,10 @@ export class EditVendorComponent  implements OnInit {
         console.log(error);
       }
     });
+  }
+
+  onCancel() {
+    this.modalCtrl.dismiss();
   }
 
 }
