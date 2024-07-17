@@ -36,6 +36,10 @@ const routes: Routes = [
   {
     path: 'vendor',
     loadChildren: () => import('./vendor/vendor.module').then( m => m.VendorPageModule)
+  },
+  {
+    path: 'vendor-sign-up',
+    loadChildren: () => import('./vendor-sign-up/vendor-sign-up.module').then( m => m.VendorSignUpPageModule)
   }
 ];
 

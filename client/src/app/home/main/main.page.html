@@ -4,24 +4,16 @@
   <app-sub-header></app-sub-header>
   <ion-list id="container">
     <ion-item>
+
       <ion-button 
-          shape="round" 
-          color="danger" 
-          class="toggle-btn"
-          size="medium"
-          slot="start"
-          [fill]="fillList"
-          (click)="onListClick()"
-        >List</ion-button>
-        <ion-button 
-          shape="round" 
-          color="danger" 
-          class="toggle-btn"
-          size="medium"
-          slot="end"
-          [fill]="fillMap"
-          (click)="onMapClick()"
-        >Map</ion-button>
+        shape="round" 
+        color="danger" 
+        class="toggle-btn"
+        size="medium"
+        slot="end"
+        fill="outline"
+        (click)="onMapClick()"
+      >Map</ion-button>
     </ion-item>
   
     <ion-item> 

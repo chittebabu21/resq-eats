@@ -72,7 +72,7 @@ export class RegisterPage implements OnInit {
 
               setTimeout(() => {
                 this.router.navigateByUrl('/');
-              }, 5000);
+              }, 3000);
             },
             error: (error) => {
               console.log(error);

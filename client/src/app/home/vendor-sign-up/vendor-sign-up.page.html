@@ -1,0 +1,77 @@
+<app-header></app-header>
+
+<ion-content [fullscreen]="true" color="light">
+  <app-sub-header></app-sub-header>
+
+  <form [formGroup]="vendorForm" (ngSubmit)="onSignUp()">
+    <ion-list id="container">
+      <ion-text color="tertiary">VENDOR SIGN UP FORM</ion-text>
+
+      <ion-item>
+        <ion-input
+          labelPlacement="floating"
+          label="Vendor Name"
+          fill="outline"
+          shape="round"
+          clearInput="true"
+          type="text"
+          formControlName="vendor_name"
+        ></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <div class="phone-group">
+          <ion-select aria-label="country code" formControlName="country_code">
+            <ion-select-option value="+65">+65</ion-select-option>
+          </ion-select>
+          <ion-input
+            labelPlacement="floating"
+            label="Contact Number"
+            fill="outline"
+            shape="round"
+            clearInput="true"
+            type="text"
+            formControlName="contact_no"
+          ></ion-input>
+        </div>
+      </ion-item>
+
+      <ion-item>
+        <ion-input
+          labelPlacement="floating"
+          label="Address"
+          fill="outline"
+          shape="round"
+          clearInput="true"
+          type="text"
+          formControlName="address"
+        ></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-input
+          labelPlacement="floating"
+          label="Postal Code"
+          fill="outline"
+          shape="round"
+          clearInput="true"
+          type="text"
+          formControlName="postal_code"
+        ></ion-input>
+      </ion-item>
+
+      <p *ngIf=" errorMsg !== '' " class="error">{{ errorMsg }}</p>
+    
+      <ion-button
+        fill="solid"
+        color="success"
+        expand="block"
+        shape="round"
+        type="submit"
+        [disabled]="vendorForm.invalid"
+      >
+        <ion-icon name="play-outline" slot="end"></ion-icon>
+      SIGN UP</ion-button>
+    </ion-list>
+  </form>
+</ion-content>

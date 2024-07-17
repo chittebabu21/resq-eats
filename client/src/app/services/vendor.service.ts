@@ -48,6 +48,16 @@ export class VendorService {
     );
   }
 
+  insertVendor(body: any): Observable<any> {
+    const token = localStorage.getItem('token');
+    const cleanedToken = token?.replace(/^['"](.*)['"]$/, '$1');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${cleanedToken}`);
+
+    return this.http.post(this.vendorUrl, body, { headers: headers }).pipe(
+      catchError((error) => throwError(() => error))
+    );
+  }
+
   updateVendorById(vendorId: number, vendorData: FormData): Observable<any> {
     const token = localStorage.getItem('token');
     const cleanedToken = token?.replace(/^['"](.*)['"]$/, '$1');
@@ -56,5 +66,19 @@ export class VendorService {
     return this.http.put(`${this.vendorUrl}/${vendorId}`, vendorData, { headers: headers }).pipe(
       catchError((error) => throwError(() => error))
     );
+  }
+
+  set(key: string, value: any) {
+    localStorage.setItem(key, JSON.stringify(value));
+  }
+
+  get(key: string) {
+    const storedValue = localStorage.getItem(key);
+
+    if (storedValue !== null) {
+      return storedValue;
+    } else {
+      return null;
+    }
   }
 }

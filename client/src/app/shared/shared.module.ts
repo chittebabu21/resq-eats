@@ -7,6 +7,7 @@ import { SubHeaderComponent } from '../components/sub-header/sub-header.componen
 import { TabsComponent } from '../components/tabs/tabs.component';
 import { PrivacyPolicyComponent } from '../components/privacy-policy/privacy-policy.component';
 import { ContactComponent } from '../components/contact/contact.component';
+import { OrderComponent } from '../components/order/order.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { ContactComponent } from '../components/contact/contact.component';
     SubHeaderComponent,
     TabsComponent,
     PrivacyPolicyComponent,
-    ContactComponent
+    ContactComponent,
+    OrderComponent
   ],
   imports: [
     CommonModule,
@@ -25,7 +27,8 @@ import { ContactComponent } from '../components/contact/contact.component';
     SubHeaderComponent,
     TabsComponent,
     PrivacyPolicyComponent,
-    ContactComponent
+    ContactComponent,
+    OrderComponent
   ]
 })
 export class SharedModule { }

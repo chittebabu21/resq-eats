@@ -41,12 +41,12 @@
         CANCEL
         <ion-icon slot="end" name="close-outline"></ion-icon>
       </ion-button>
-      <ion-button type="submit" [disabled]="editForm.invalid">
+      <ion-button type="submit" [disabled]="!editForm.dirty && !vendorImageFile">
         SAVE
         <ion-icon slot="end" name="save-outline"></ion-icon>
       </ion-button>
      </div>
 
-     <p *ngIf="errorMsg">{{ errorMsg }}</p>
+     <ion-text *ngIf="errorMsg" color="danger">{{ errorMsg }}</ion-text>
   </form>
 </ion-content>

@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NavController } from '@ionic/angular';
+import { ModalController } from '@ionic/angular';
 
 import { FoodService } from 'src/app/services/food.service';
 import { Food } from 'src/app/interfaces/food';
+import { OrderComponent } from 'src/app/components/order/order.component';
 
 @Component({
   selector: 'app-food-detail',
@@ -20,6 +22,7 @@ export class FoodDetailPage implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private navCtrl: NavController,
+    private modalCtrl: ModalController,
     private foodService: FoodService
   ) { }
 
@@ -53,6 +56,8 @@ export class FoodDetailPage implements OnInit {
   }
 
   onOrder() {
-    console.log('Order button clicked');
+    this.modalCtrl.create({
+      component: OrderComponent
+    }).then(modalEl => modalEl.present());
   }
 }

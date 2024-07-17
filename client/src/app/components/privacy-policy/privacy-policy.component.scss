@@ -3,6 +3,12 @@
     margin-top: 10px;
 }
 
+.close-btn-container {
+    width: 100vw;
+    display: flex;
+    justify-content: flex-end;
+}
+
 ion-button {
-    margin-left: auto;
+    margin-right: 20px;
 }

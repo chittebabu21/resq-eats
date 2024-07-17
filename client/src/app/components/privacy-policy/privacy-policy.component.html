@@ -4,13 +4,16 @@
   <ion-grid id="container">
     <ion-row>
       <ion-col>
-        <ion-button
-          fill="clear"
-          size="medium"
-          (click)="onDismiss()"
-        >
-          <ion-icon name="close-outline" slot="icon-only" color="primary"></ion-icon>
-        </ion-button>
+        <div class="close-btn-container">
+          <ion-button
+            fill="clear"
+            size="medium"
+            (click)="onDismiss()"
+          >
+            <ion-icon name="close-outline" slot="icon-only" color="primary"></ion-icon>
+          </ion-button>
+        </div>
+        
         <br>
         <ion-text color="dark">
           <h1>Privacy Policy for ResQ Eats</h1>

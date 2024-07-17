@@ -36,11 +36,12 @@ export class VendorPage implements OnInit {
 
       this.vendorService.getVendorByUserId(userId).subscribe({
         next: (vendor: Vendor | null) => {
-          console.log(vendor);
           if (vendor !== null) {
             if (vendor.vendor_image_url) {
               this.vendorImageFile = vendor.vendor_image_url?.slice(30); // slice the url and get the image file name
             }
+
+            this.vendorService.set('vendorId', vendor.vendor_id);
 
             this.vendor = vendor;
             this.isLoading = true;
@@ -65,7 +66,7 @@ export class VendorPage implements OnInit {
         {
           text: 'SIGN UP',
           handler: () => {
-            this.navCtrl.navigateForward('/home/account'); // change to sign up modal url
+            this.navCtrl.navigateForward('/home/vendor-sign-up'); // change to sign up modal url
           }
         },
         {

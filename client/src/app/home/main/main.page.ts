@@ -10,9 +10,6 @@ import { Food } from '../../interfaces/food';
   styleUrls: ['./main.page.scss'],
 })
 export class MainPage implements OnInit {
-
-  fillList = 'solid';
-  fillMap = 'outline';
   food!: Food[];
   vendorNames: { [key: number]: string } = {};
 
@@ -25,17 +22,7 @@ export class MainPage implements OnInit {
     this.getAllFood();
   }
 
-  onListClick() {
-    this.fillList = 'solid';
-    this.fillMap = 'outline';
-
-    this.navCtrl.navigateBack('/home/main');
-  }
-
   onMapClick() {
-    this.fillList = 'outline';
-    this.fillMap = 'solid';
-
     this.navCtrl.navigateForward('/home/map');
   }
 
