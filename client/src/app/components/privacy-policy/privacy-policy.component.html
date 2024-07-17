@@ -1,0 +1,109 @@
+<app-header></app-header>
+
+<ion-content [fullscreen]="true" color="light">
+  <ion-grid id="container">
+    <ion-row>
+      <ion-col>
+        <ion-button
+          fill="clear"
+          size="medium"
+          (click)="onDismiss()"
+        >
+          <ion-icon name="close-outline" slot="icon-only" color="primary"></ion-icon>
+        </ion-button>
+        <br>
+        <ion-text color="dark">
+          <h1>Privacy Policy for ResQ Eats</h1>
+
+          <p>Effective Date: 01/07/2024</p>
+
+          <p>Last Updated: 01/07/2024</p>
+
+          <h3>Introduction</h3>
+
+          Welcome to ResQ Eats! We are committed to protecting your privacy and ensuring that your personal information is handled in a safe and responsible manner. This Privacy Policy outlines how we collect, use, and protect your information when you use our app and services. By using ResQ Eats, you agree to the terms of this Privacy Policy.
+
+          <h3>Information We Collect</h3>
+
+          <h4>Personal Information</h4>
+
+          - Consumers: When you register as a consumer, we may collect personal information such as your name, email address, phone number, and payment information.
+          - Vendors: When you register as a vendor (restaurant or hotel), we may collect personal information such as your business name, contact person’s name, email address, phone number, business address, and payment information.
+
+          <h4>Usage Data</h4>
+
+          We collect information about your interactions with the app, including the pages you visit, the features you use, and the time and date of your visits.
+
+          <h4>Device Information</h4>
+
+          We collect information about the device you use to access our app, including the device type, operating system, and unique device identifiers.
+
+          <h3>How We Use Your Information</h3>
+
+          <h4>To Provide and Improve Our Services</h4>
+
+          - Consumers: To process your purchases, communicate with you, and enhance your user experience.
+          - Vendors: To facilitate your listings, communicate with you, and improve our vendor services.
+
+          <h4>For Marketing and Promotions</h4>
+
+          We may use your information to send you promotional materials and offers, subject to your preferences and applicable laws.
+
+          <h4>For Security and Compliance</h4>
+
+          We use your information to ensure the security of our services, prevent fraud, and comply with legal obligations.
+
+          <h3>Sharing Your Information</h3>
+
+          <h4>With Service Providers</h4>
+
+          We may share your information with third-party service providers who perform services on our behalf, such as payment processing, data analysis, and email delivery.
+
+          <h4>With Business Partners</h4>
+
+          We may share your information with business partners to offer you certain products, services, or promotions.
+
+          <h4>For Legal Reasons</h4>
+
+          We may disclose your information if required by law, regulation, or legal process, or if we believe in good faith that such disclosure is necessary to protect our rights, your safety, or the safety of others.
+
+          <h3>Your Choices and Rights</h3>
+
+          <h4>Access and Update Your Information</h4>
+
+          You can access and update your personal information through your account settings. If you need assistance, please contact us at [Contact Email].
+
+          <h4>Marketing Communication</h4>
+
+          You can opt out of receiving marketing communications from us by following the unsubscribe instructions included in our emails or contacting us at [Contact Email].
+
+          <h4>Data Security</h4>
+
+          We implement appropriate technical and organizational measures to protect your personal information from unauthorized access, use, or disclosure. However, no method of transmission over the internet or electronic storage is completely secure, so we cannot guarantee absolute security.
+
+          <h4>Data Retention</h4>
+
+          We retain your personal information for as long as necessary to provide our services, comply with our legal obligations, resolve disputes, and enforce our agreements.
+
+          <h4>Children's Privacy</h4>
+
+          ResQ Eats is not intended for use by children under the age of 13. We do not knowingly collect personal information from children under 13. If we become aware that we have inadvertently collected personal information from a child under 13, we will take steps to delete such information promptly.
+
+          <h4>Changes to This Privacy Policy</h4>
+
+          We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the effective date. Your continued use of ResQ Eats after any changes indicates your acceptance of the revised Privacy Policy.
+
+          <p>If you have any questions or concerns about this Privacy Policy or our data practices, please contact us at:</p>
+
+          <h2>ResQ Eats</h2>
+
+          <p>Email: {{ supportEmail | lowercase }}</p>
+
+          <p>Address: {{ companyAddress }}</p>
+
+          By using ResQ Eats, you acknowledge that you have read and understood this Privacy Policy and agree to its terms. Thank you for helping us reduce food wastage and make a positive impact!
+        </ion-text>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

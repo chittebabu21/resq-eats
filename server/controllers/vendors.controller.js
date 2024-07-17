@@ -130,23 +130,32 @@ module.exports = {
         // get request body and image file
         const body = req.body;
 
-        if (!body.vendor_id) {
+        // get id from params
+        const id = req.params.id;
+
+        if (!body) {
             return res.status(500).json({
                 success: 0,
-                message: 'Vendor ID is required'
+                message: 'Request body is required...'
             });
         }
 
         if (req.file) {
             const imageUrl = req.file.filename;
-            body.image_url = imageUrl;
+            body.vendor_image_url = imageUrl;
         } 
 
-        updateVendorById(body, body.vendor_id, (error, results) => {
+        updateVendorById(body, id, (error, results) => {
+
             if (error) {
                 return res.status(400).json({
                     success: 0,
                     message: 'Failed to update vendor...'
+                });
+            } else if (!results) {
+                return res.status(500).json({
+                    success: 0,
+                    message: 'No vendor found...'
                 });
             } else {
                 return res.status(200).json({

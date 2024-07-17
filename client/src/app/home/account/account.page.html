@@ -20,17 +20,30 @@
           <p>Name: {{ user.username | uppercase }}</p>
           <p>Email: {{ user.email_address }}</p>
           <p>Joined: {{ user.created_on | date }}</p>
-
-          
-          <!-- <ion-toggle 
-            aria-label="secondary" 
-            labelPlacement="end"
-            [checked]="false"
-            (ionChange)="onToggle()"
-          >Switch to vendor account</ion-toggle> -->
-
         </div>
 
+        <br>
+
+        <ion-button
+          fill="clear"
+          size="small"
+          color="dark"
+          (click)="onPrivacyPolicy()"
+        >
+        Privacy Policy
+        </ion-button>
+
+        <br>
+        <ion-button
+          fill="clear"
+          size="small"
+          color="dark"
+          (click)="onContact()"
+        >
+        Contact Us
+        </ion-button>
+
+        <br>
         <ion-button
           fill="outline"
           size="medium"

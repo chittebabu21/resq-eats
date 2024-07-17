@@ -4,7 +4,6 @@ import { environment } from 'src/environments/environment';
 
 import { Vendor } from '../interfaces/vendor';
 import { catchError, map, Observable, of, throwError } from 'rxjs';
-import { User } from '../interfaces/user';
 
 @Injectable({
   providedIn: 'root'

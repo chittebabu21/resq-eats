@@ -14,11 +14,28 @@
       <ion-label position="floating">Address</ion-label>
       <ion-input type="text" formControlName="address"></ion-input>
     </ion-item>
-    <ion-item>
-      <ion-label position="floating">Image</ion-label>
-      <input type="file" (change)="onImagePicked($event)" accept="image/*">
-    </ion-item>
-    <!-- <img *ngIf="vendorImageFile" [src]="vendorImageFile" alt="Vendor Image"> -->
+
+    <div class="picker">
+      <ion-item>
+        <ion-img
+          role="button"
+          class="image"
+          *ngIf="vendorImageFile"
+          [src]="vendorImageFile"
+          (click)="onImagePicked()"
+        ></ion-img>
+        <ion-button
+          color="primary"
+          size="medium"
+          (click)="onImagePicked()"
+          *ngIf="!vendorImageFile"
+        >
+        <ion-icon name="image-outline" slot="start"></ion-icon>
+        <ion-label>Select Image</ion-label>
+        </ion-button>
+      </ion-item>
+    </div>
+
      <div class="btn-group">
       <ion-button fill="outline" color="secondary" (click)="onCancel()">
         CANCEL
@@ -29,5 +46,7 @@
         <ion-icon slot="end" name="save-outline"></ion-icon>
       </ion-button>
      </div>
+
+     <p *ngIf="errorMsg">{{ errorMsg }}</p>
   </form>
 </ion-content>

@@ -16,7 +16,7 @@ router.get('/', getAllVendors);
 router.get('/:id', getVendorById);
 router.get('/user/:id', userAuth, getVendorByUserId);
 router.post('/', userAuth, insertVendor);
-router.put('/', userAuth, upload, updateVendorById);
+router.put('/:id', userAuth, upload, updateVendorById);
 router.delete('/:id', userAuth, deleteVendorById);
 
 // export router modules

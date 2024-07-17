@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { SplashScreen } from '@capacitor/splash-screen';
+import { Capacitor } from '@capacitor/core';
+import { Platform } from '@ionic/angular';
 
 @Component({
   selector: 'app-root',
@@ -7,10 +10,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppComponent implements OnInit {
 
-  constructor() {
+  constructor(
+    private platform: Platform
+  ) {
     
   }
 
   ngOnInit(): void {
+    this.platform.ready().then(() => {
+      if (Capacitor.isPluginAvailable('SplashScreen')) {
+        SplashScreen.hide();
+      }
+    });
   }
 }
