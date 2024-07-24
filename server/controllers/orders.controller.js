@@ -83,6 +83,7 @@ module.exports = {
                     message: 'Failed to retrieve order with order details...'
                 });
             } else if (!results) {
+                console.log(results);
                 return res.status(500).json({
                     success: 0,
                     message: 'No order with order details found...'
@@ -172,8 +173,9 @@ module.exports = {
                             } else {
                                 const orderId = results.insertId;
                 
-                                insertOrderDetail({ order_id: orderId, food_id: foodId, quantity: quantity }, (error, results) => {
+                                insertOrderDetail({ order_id: orderId, food_id: foodId, order_quantity: quantity }, (error, results) => {
                                     if (error) {
+                                        console.log(error);
                                         return res.status(400).json({
                                             success: 0,
                                             message: 'Failed to insert order details...'

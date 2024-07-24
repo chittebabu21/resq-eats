@@ -1,5 +1,36 @@
 <app-header></app-header>
 
 <ion-content [fullscreen]="true" color="light">
-  <p>favourites</p>
+  <ion-list class="container" *ngIf="hasOrders">
+    <ion-text>MOST ORDERED</ion-text>
+    <ion-item *ngFor="let order of orders">
+      <ion-card>
+        <ion-img [src]="orderDetailsMap.get(order.order_id)?.image_url"></ion-img>
+        <ion-card-header color="light">
+          <ion-card-title>{{ orderDetailsMap.get(order.order_id)?.food_name }}</ion-card-title>
+          <ion-card-subtitle *ngIf="vendor">{{ vendor.vendor_name }}</ion-card-subtitle>
+        </ion-card-header>
+
+        <ion-card-content>
+          <ion-text>{{ order.ordered_on | date }}</ion-text>
+        </ion-card-content>
+      </ion-card>
+    </ion-item>
+  </ion-list>
+
+  <ion-grid class="container" *ngIf="!hasOrders">
+    <ion-row>
+      <ion-col>
+        <ion-button fill="clear" size="large" (click)="onRefresh()">
+          <ion-icon slot="icon-only" name="refresh-outline"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  
+    <ion-row>
+      <ion-col>
+        <ion-text>No favourites to show. Refresh and try again.</ion-text>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

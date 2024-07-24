@@ -1,7 +1,7 @@
 <app-header></app-header>
 
 <ion-content [fullscreen]="true" color="light">
-  <form [formGroup]="editForm" (ngSubmit)="onSubmit()" id="container">
+  <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
     <ion-item>
       <ion-label position="floating">Vendor Name</ion-label>
       <ion-input type="text" formControlName="vendor_name"></ion-input>

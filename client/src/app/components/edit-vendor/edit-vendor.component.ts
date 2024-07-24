@@ -29,7 +29,6 @@ export class EditVendorComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
     this.editForm = new FormGroup({
       vendor_name: new FormControl('', {
         updateOn: 'blur',
@@ -146,6 +145,7 @@ export class EditVendorComponent implements OnInit {
         successAlert.present();
         this.editForm.reset();
         this.vendorImageFile = '';
+        this.errorMsg = '';
       },
       error: async (error) => {
         console.log(error);

@@ -1,3 +1,4 @@
+import { Vendor } from "./vendor";
 
 export interface Food {
     food_id: number,
@@ -6,5 +7,6 @@ export interface Food {
     quantity: number,
     image_url: string | null,
     vendor_id: number,
-    created_on: Date
+    created_on: Date,
+    vendor?: Vendor
 }

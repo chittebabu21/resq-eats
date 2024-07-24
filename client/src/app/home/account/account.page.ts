@@ -47,7 +47,7 @@ export class AccountPage implements OnInit {
             this.isVerified = false;
           }
 
-          if (user.email_address.endsWith('gmail.com') && user.image_url?.startsWith('http://localhost:4000/uploads')) {
+          if (user.email_address.endsWith('gmail.com') && user.image_url?.startsWith('http://localhost:4000/uploads/')) {
             const imageUrl = user.image_url?.slice(30); 
 
             if (imageUrl) {

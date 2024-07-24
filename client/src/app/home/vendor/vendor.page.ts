@@ -1,11 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { IonAccordionGroup, NavController } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
 import { ModalController } from '@ionic/angular';
 
 import { EditVendorComponent } from '../../components/edit-vendor/edit-vendor.component';
 import { Vendor } from '../../interfaces/vendor';
 import { VendorService } from '../../services/vendor.service';
+import { FoodService } from '../../services/food.service';
+import { AddMenuItemComponent } from '../../components/add-menu-item/add-menu-item.component';
+import { Food } from '../../interfaces/food';
 
 @Component({
   selector: 'app-vendor',
@@ -13,19 +16,24 @@ import { VendorService } from '../../services/vendor.service';
   styleUrls: ['./vendor.page.scss'],
 })
 export class VendorPage implements OnInit {
+  @ViewChild('accordionGroup', {static: true}) accordionGroup!: IonAccordionGroup;
   vendor!: Vendor;
+  menu!: Food[];
   isLoading = false;
+  hasMenu = false;
   vendorImageFile!: string;
 
   constructor(
     private navCtrl: NavController,
     private alertCtrl: AlertController,
     private modalCtrl: ModalController,
-    private vendorService: VendorService
+    private vendorService: VendorService,
+    private foodService: FoodService
   ) {}
 
   ngOnInit() {
     this.getVendorByUserId();
+    this.getMenuItemsByVendorId();
   }
 
   getVendorByUserId() {
@@ -82,10 +90,45 @@ export class VendorPage implements OnInit {
     failAlert.present();
   }
 
+  getMenuItemsByVendorId() {
+    const jsonVendorId = localStorage.getItem('vendorId');
+
+    if (jsonVendorId) {
+      const vendorId = parseInt(jsonVendorId, 10);
+
+      this.foodService.getFoodByVendorId(vendorId).subscribe({
+        next: (response: Food[]) => {
+          if (response.length > 0) {
+            this.menu = response;
+            this.hasMenu = true;
+          } else {
+            this.hasMenu = false;
+          }
+        },
+        error: (error) => {
+          console.log(error);
+        }
+      });
+    }
+  }
+
+  onMenuEdit() {
+
+  }
+
+  onMenuDelete() {
+    
+  }
+
   onEdit() {
     this.modalCtrl.create({
       component: EditVendorComponent
     }).then(modalEl => modalEl.present());
   }
 
+  onAddMenuItem() {
+    this.modalCtrl.create({
+      component: AddMenuItemComponent
+    }).then(modalEl => modalEl.present());
+  }
 }

@@ -1,0 +1,53 @@
+<app-header></app-header>
+
+<ion-content [fullscreen]="true" color="light">
+  <form [formGroup]="addForm" (ngSubmit)="onSubmit()" id="container">
+    <ion-text color="tertiary">ADD MENU ITEM</ion-text>
+    <ion-item>
+      <ion-input
+        labelPlacement="floating"
+        label="Food Name"
+        fill="outline"
+        shape="round"
+        clearInput="true"
+        type="text"
+        formControlName="food_name"
+      ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input
+        labelPlacement="floating"
+        label="Price"
+        fill="outline"
+        shape="round"
+        clearInput="true"
+        type="number"
+        formControlName="price"
+      ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input
+        labelPlacement="floating"
+        label="Quantity"
+        fill="outline"
+        shape="round"
+        clearInput="true"
+        type="number"
+        formControlName="quantity"
+      ></ion-input>
+    </ion-item>
+
+    <div class="btn-group">
+      <ion-button fill="outline" color="secondary" (click)="onCancel()">
+        CANCEL
+        <ion-icon slot="end" name="close-outline"></ion-icon>
+      </ion-button>
+      <ion-button type="submit" [disabled]="!addForm.dirty || addForm.invalid">
+        ADD
+        <ion-icon name="add-outline"></ion-icon>
+      </ion-button>
+     </div>
+
+     <ion-text *ngIf="errorMsg" color="danger">{{ errorMsg }}</ion-text>
+  </form>
+</ion-content>

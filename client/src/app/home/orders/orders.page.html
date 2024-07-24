@@ -1,6 +1,8 @@
 <app-header></app-header>
 
 <ion-content [fullscreen]="true" color="light">
+  <app-sub-header></app-sub-header>
+  
   <ion-accordion-group class="container" *ngIf="hasOrders" #accordionGroup>
     <ion-accordion *ngFor="let order of orders">
       <ion-item slot="header" color="light">
@@ -10,7 +12,7 @@
         </ion-label>
       </ion-item>
       <div class="ion-padding" slot="content">
-        <ion-text>
+        <ion-text color="secondary">
           Amount Paid: {{ order.amount_paid | currency }}<br>
           Order Status: {{ order.order_status }}<br>
           Ordered On: {{ order.ordered_on | date }}<br>

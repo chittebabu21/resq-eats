@@ -14,6 +14,14 @@ export class VendorService {
 
   constructor(private http: HttpClient) { }
 
+  getVendorById(id: number): Observable<any> {
+    return this.http.get<{ success: number; data: Vendor }>(`${this.vendorUrl}/${id}`).pipe(
+      map((res) => {
+        return res.data;
+      })
+    );
+  }
+
   getVendorByUserId(id: number): Observable<any> {
     const token = localStorage.getItem('token');
     const cleanedToken = token?.replace(/^['"](.*)['"]$/, '$1');

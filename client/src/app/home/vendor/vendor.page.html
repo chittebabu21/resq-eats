@@ -29,7 +29,43 @@
           </ion-card-content>
         </ion-card>
 
-        
+        <ion-button
+          fill="outline"
+          size="medium"
+          shape="round"
+          color="tertiary"
+          (click)="onAddMenuItem()"
+        >
+          Add Menu Item
+        </ion-button>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-accordion-group class="accordion-group" *ngIf="hasMenu" #accordionGroup>
+          <ion-accordion *ngFor="let food of menu">
+            <ion-item slot="header" color="light">
+              <ion-label>
+                {{ food.food_name | uppercase }}
+              </ion-label>
+            </ion-item>
+            <div class="ion-padding" slot="content">
+              <ion-text color="secondary">
+                Price: {{ food.price | currency }}<br>
+                Quantity: {{ food.quantity }}<br>
+              </ion-text>
+
+              <ion-button fill="clear" color="secondary" (click)="onMenuEdit()">
+                <ion-icon name="create-outline"></ion-icon>
+              </ion-button>
+
+              <ion-button fill="clear" color="secondary" color="danger" (click)="onMenuDelete()">
+                <ion-icon name="close-circle-outline"></ion-icon>
+              </ion-button>
+            </div>
+          </ion-accordion>
+        </ion-accordion-group>
       </ion-col>
     </ion-row>
   </ion-grid>

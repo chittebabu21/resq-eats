@@ -1,0 +1,24 @@
+form {
+    margin: 10px;
+}
+
+ion-input {
+    margin: 15px 10px;
+    color: var(--ion-color-dark-tint);
+}
+
+.btn-group {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+#container {
+    text-align: center;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+  

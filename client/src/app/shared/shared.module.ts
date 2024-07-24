@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { HeaderComponent } from '../components/header/header.component';
 import { SubHeaderComponent } from '../components/sub-header/sub-header.component';
@@ -8,6 +9,7 @@ import { TabsComponent } from '../components/tabs/tabs.component';
 import { PrivacyPolicyComponent } from '../components/privacy-policy/privacy-policy.component';
 import { ContactComponent } from '../components/contact/contact.component';
 import { OrderComponent } from '../components/order/order.component';
+import { AddMenuItemComponent } from '../components/add-menu-item/add-menu-item.component';
 
 @NgModule({
   declarations: [
@@ -16,11 +18,13 @@ import { OrderComponent } from '../components/order/order.component';
     TabsComponent,
     PrivacyPolicyComponent,
     ContactComponent,
-    OrderComponent
+    OrderComponent,
+    AddMenuItemComponent
   ],
   imports: [
     CommonModule,
-    IonicModule
+    IonicModule,
+    ReactiveFormsModule
   ],
   exports: [
     HeaderComponent,
@@ -28,7 +32,8 @@ import { OrderComponent } from '../components/order/order.component';
     TabsComponent,
     PrivacyPolicyComponent,
     ContactComponent,
-    OrderComponent
+    OrderComponent,
+    AddMenuItemComponent
   ]
 })
 export class SharedModule { }
