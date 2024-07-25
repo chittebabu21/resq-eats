@@ -30,7 +30,11 @@ export class MainPage implements OnInit {
     this.foodService.getAllFood().subscribe({
       next: (response: Food[]) => {
         this.food = response;
+        
         this.food.forEach(item => {
+          if (item.image_url === 'http://localhost:4000/uploads/null') {
+            item.image_url = '/assets/placeholder-images/food.png';
+          }
           this.getFoodByVendorId(item.vendor_id);
         });
       },

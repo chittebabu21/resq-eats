@@ -19,7 +19,6 @@ export class AccountPage implements OnInit {
   isVerified = false;
   authUserImageUrl!: string;
   checked = false;
-  placeholderUser = '/assets/placeholder-images/user.png';
 
   constructor(
     private navCtrl: NavController, 
@@ -53,6 +52,10 @@ export class AccountPage implements OnInit {
             if (imageUrl) {
               this.authUserImageUrl = imageUrl;
             }
+          }
+
+          if (user.image_url === 'http://localhost:4000/uploads/null') {
+            user.image_url = '/assets/placeholder-images/user.png';
           }
 
           this.isUser = true;

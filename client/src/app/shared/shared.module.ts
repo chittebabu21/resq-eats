@@ -10,6 +10,7 @@ import { PrivacyPolicyComponent } from '../components/privacy-policy/privacy-pol
 import { ContactComponent } from '../components/contact/contact.component';
 import { OrderComponent } from '../components/order/order.component';
 import { AddMenuItemComponent } from '../components/add-menu-item/add-menu-item.component';
+import { EditMenuItemComponent } from '../components/edit-menu-item/edit-menu-item.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { AddMenuItemComponent } from '../components/add-menu-item/add-menu-item.
     PrivacyPolicyComponent,
     ContactComponent,
     OrderComponent,
-    AddMenuItemComponent
+    AddMenuItemComponent,
+    EditMenuItemComponent
   ],
   imports: [
     CommonModule,
@@ -33,7 +35,8 @@ import { AddMenuItemComponent } from '../components/add-menu-item/add-menu-item.
     PrivacyPolicyComponent,
     ContactComponent,
     OrderComponent,
-    AddMenuItemComponent
+    AddMenuItemComponent,
+    EditMenuItemComponent
   ]
 })
 export class SharedModule { }

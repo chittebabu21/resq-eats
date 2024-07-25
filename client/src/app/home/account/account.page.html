@@ -9,7 +9,6 @@
           <ion-avatar slot="start">
             <img *ngIf="!authUserImageUrl" [src]="user.image_url" alt="profile image">
             <img *ngIf="authUserImageUrl" [src]="authUserImageUrl" alt="google profile image">
-            <img *ngIf="!authUserImageUrl && user.image_url === null" [src]="placeholderUser" alt="placeholder image">
           </ion-avatar>
 
           <ion-text *ngIf="isVerified" color="success">Verified</ion-text>

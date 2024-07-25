@@ -19,6 +19,6 @@ const fileFilter = (req, file, cb) => {
     }
 }
 
-const upload = multer({ storage: fileStorage, fileFilter: fileFilter }).single('image_url');
+const upload = multer({ storage: fileStorage, fileFilter: fileFilter }).single('vendor_image_url');
 
 module.exports = upload;

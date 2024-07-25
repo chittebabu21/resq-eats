@@ -129,6 +129,7 @@ export class EditVendorComponent implements OnInit {
     this.vendorService.updateVendorById(this.vendor.vendor_id, vendorData).subscribe({
       next: async (response: any) => {
         console.log(response);
+        
         const successAlert = await this.alertCtrl.create({
           header: 'SUCCESS!',
           subHeader: 'You have edited successfully!',

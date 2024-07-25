@@ -1,0 +1,52 @@
+<app-header></app-header>
+
+<ion-content [fullscreen]="true" color="light">
+  <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+    <ion-item>
+      <ion-label position="floating">Food Name</ion-label>
+      <ion-input type="text" formControlName="food_name"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Price</ion-label>
+      <ion-input type="number" formControlName="price"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Quantity</ion-label>
+      <ion-input type="number" formControlName="quantity"></ion-input>
+    </ion-item>
+
+    <div class="picker">
+      <ion-item>
+        <ion-img
+          role="button"
+          class="image"
+          *ngIf="foodImageFile"
+          [src]="foodImageFile"
+          (click)="onImagePicked()"
+        ></ion-img>
+        <ion-button
+          color="primary"
+          size="medium"
+          (click)="onImagePicked()"
+          *ngIf="!foodImageFile"
+        >
+        <ion-icon name="image-outline" slot="start"></ion-icon>
+        <ion-label>Select Image</ion-label>
+        </ion-button>
+      </ion-item>
+    </div>
+
+     <div class="btn-group">
+      <ion-button fill="outline" color="secondary" (click)="onCancel()">
+        CANCEL
+        <ion-icon slot="end" name="close-outline"></ion-icon>
+      </ion-button>
+      <ion-button type="submit" [disabled]="!editForm.dirty && !foodImageFile">
+        SAVE
+        <ion-icon slot="end" name="save-outline"></ion-icon>
+      </ion-button>
+     </div>
+
+     <ion-text *ngIf="errorMsg" color="danger">{{ errorMsg }}</ion-text>
+  </form>
+</ion-content>

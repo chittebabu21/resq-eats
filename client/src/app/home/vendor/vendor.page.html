@@ -56,11 +56,11 @@
                 Quantity: {{ food.quantity }}<br>
               </ion-text>
 
-              <ion-button fill="clear" color="secondary" (click)="onMenuEdit()">
+              <ion-button fill="clear" color="secondary" (click)="onMenuEdit(food.food_id)">
                 <ion-icon name="create-outline"></ion-icon>
               </ion-button>
 
-              <ion-button fill="clear" color="secondary" color="danger" (click)="onMenuDelete()">
+              <ion-button fill="clear" color="secondary" color="danger" (click)="onMenuDelete(food.food_id)">
                 <ion-icon name="close-circle-outline"></ion-icon>
               </ion-button>
             </div>

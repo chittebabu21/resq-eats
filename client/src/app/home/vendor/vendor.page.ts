@@ -9,6 +9,7 @@ import { VendorService } from '../../services/vendor.service';
 import { FoodService } from '../../services/food.service';
 import { AddMenuItemComponent } from '../../components/add-menu-item/add-menu-item.component';
 import { Food } from '../../interfaces/food';
+import { EditMenuItemComponent } from 'src/app/components/edit-menu-item/edit-menu-item.component';
 
 @Component({
   selector: 'app-vendor',
@@ -112,12 +113,64 @@ export class VendorPage implements OnInit {
     }
   }
 
-  onMenuEdit() {
-
+  onMenuEdit(id: number) {
+    this.foodService.getFoodById(id).subscribe({
+      next: (response: any) => {
+        this.modalCtrl.create({
+          component: EditMenuItemComponent,
+          componentProps: { selectedMenuItem: response }
+        }).then(modalEl => modalEl.present());
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    });
   }
 
-  onMenuDelete() {
-    
+  async onMenuDelete(id: number) {
+    const confirmAlert = await this.alertCtrl.create({
+      header: 'DELETE?',
+      subHeader: 'Click OK to delete.',
+      message: 'Click CANCEL to go back.',
+      buttons: [
+        {
+          text: 'OK',
+          handler: () => {
+            this.foodService.deleteFoodById(id).subscribe({
+              next: async (response: any) => {
+                if (response.success === 1) {
+                  const successAlert = await this.alertCtrl.create({
+                    header: 'SUCCESS!',
+                    subHeader: 'Successfully deleted menu item!',
+                    message: 'Click OK to continue.',
+                    buttons: [
+                      {
+                        text: 'OK',
+                        handler: () => {
+                          successAlert.dismiss();
+                          this.navCtrl.navigateBack('/home/vendor');
+                        }
+                      }
+                    ]
+                  });
+        
+                  successAlert.present();
+                }
+              }
+            });
+          }
+        },
+        {
+          text: 'CANCEL',
+          handler: () => {
+            confirmAlert.dismiss();
+            this.navCtrl.navigateBack('/home/vendor');
+          }
+        }
+      ]
+    });
+
+    confirmAlert.present();
   }
 
   onEdit() {
