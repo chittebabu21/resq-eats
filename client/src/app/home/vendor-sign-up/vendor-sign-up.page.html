@@ -2,6 +2,15 @@
 
 <ion-content [fullscreen]="true" color="light">
   <app-sub-header></app-sub-header>
+  <div class="back-btn">
+    <ion-button
+      fill="clear"
+      color="secondary"
+      (click)="onBack()"
+    >
+      <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+    </ion-button>
+  </div>
 
   <form [formGroup]="vendorForm" (ngSubmit)="onSignUp()">
     <ion-list id="container">

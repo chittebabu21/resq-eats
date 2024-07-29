@@ -105,4 +105,8 @@ export class VendorSignUpPage implements OnInit {
     }, 3000);
   }
 
+  onBack() {
+    this.navCtrl.navigateBack('/home/account');
+  }
+
 }
