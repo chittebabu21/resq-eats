@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const path = require('path');
+const helmet = require('helmet');
 const passport = require('./config/passport');
 
 // import routers
@@ -18,6 +19,15 @@ const passportRouter = require('./routes/passport.route');
 // initialize dependencies
 const app = express();
 dotenv.config();
+
+// use helmet to protect data in transit
+app.use(helmet({
+    strictTransportSecurity: false
+}));
+app.use(helmet.xssFilter()); // xss attack protection
+app.use(helmet.frameguard({ action: 'deny' })); // clickjacking attack protection
+
+// express configurations
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
