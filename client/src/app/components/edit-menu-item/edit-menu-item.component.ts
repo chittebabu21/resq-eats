@@ -14,7 +14,7 @@ import { Helper } from '../../utility/helper';
   templateUrl: './edit-menu-item.component.html',
   styleUrls: ['./edit-menu-item.component.scss'],
 })
-export class EditMenuItemComponent  implements OnInit {
+export class EditMenuItemComponent implements OnInit {
   @Input() selectedMenuItem!: Food;
   editForm!: FormGroup;
   food!: Food;
@@ -83,7 +83,6 @@ export class EditMenuItemComponent  implements OnInit {
         try {
           const blob = this.helper.base64ToBlob(this.foodImageFile.slice(23), 'image/jpg');
           this.imageFile = new File([blob], 'vendor_image.jpg', { type: 'image/jpg'} );
-          console.log(this.imageFile);
         } catch (error) {
           console.log(error);
           return;

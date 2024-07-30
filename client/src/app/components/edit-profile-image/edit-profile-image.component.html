@@ -1,0 +1,37 @@
+<app-header></app-header>
+
+<ion-content [fullscreen]="true" color="light">
+  <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+    <div class="picker">
+      <ion-item>
+        <ion-img
+          role="button"
+          class="image"
+          *ngIf="userImageFile"
+          [src]="userImageFile"
+          (click)="onImagePicked()"
+        ></ion-img>
+        <ion-button
+          color="primary"
+          size="medium"
+          (click)="onImagePicked()"
+          *ngIf="!userImageFile"
+        >
+        <ion-icon name="image-outline" slot="start"></ion-icon>
+        <ion-label>Select Image</ion-label>
+        </ion-button>
+      </ion-item>
+    </div>
+
+     <div class="btn-group">
+      <ion-button fill="outline" color="secondary" (click)="onCancel()">
+        CANCEL
+        <ion-icon slot="end" name="close-outline"></ion-icon>
+      </ion-button>
+      <ion-button type="submit" [disabled]="!editForm.dirty && !userImageFile">
+        SAVE
+        <ion-icon slot="end" name="save-outline"></ion-icon>
+      </ion-button>
+     </div>
+  </form>
+</ion-content>

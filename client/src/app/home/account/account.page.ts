@@ -6,6 +6,7 @@ import { UserService } from '../../services/user.service';
 import { User } from '../../interfaces/user';
 import { PrivacyPolicyComponent } from 'src/app/components/privacy-policy/privacy-policy.component';
 import { ContactComponent } from 'src/app/components/contact/contact.component';
+import { EditProfileImageComponent } from 'src/app/components/edit-profile-image/edit-profile-image.component';
 
 @Component({
   selector: 'app-account',
@@ -67,6 +68,17 @@ export class AccountPage implements OnInit {
         }
       });
     }
+  }
+
+  onEditProfileImage(id: number) {
+    this.userService.getUserById(id).subscribe({
+      next: (response: any) => {
+        this.modalCtrl.create({
+          component: EditProfileImageComponent,
+          componentProps: { selectedUser: response }
+        }).then(modalEl => modalEl.present());
+      }
+    });
   }
 
   onSwitchVendor() {

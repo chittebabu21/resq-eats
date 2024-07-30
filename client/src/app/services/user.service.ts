@@ -63,17 +63,14 @@ export class UserService {
     return this.http.post(`${this.userUrl}/oauth-user`, body);
   }
 
-  updateUserImage(body: any) {
-    const headers = new HttpHeaders({
-      'Content-Type': 'multipart/form-data'
-    });
+  updateUserImage(body: any): Observable<any> {
+    const token = localStorage.getItem('token');
+    const cleanedToken = token?.replace(/^['"](.*)['"]$/, '$1');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${cleanedToken}`);
 
-    const payload = {
-      email_address: body.email_address,
-      image_url: body.image_url
-    };
-
-    return this.http.put(this.userUrl, payload, { headers: headers });
+    return this.http.put(this.userUrl, body, { headers: headers }).pipe(
+      catchError((error) => throwError(() => error))
+    );
   }
 
   login(body: any) {

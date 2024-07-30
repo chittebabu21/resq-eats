@@ -11,6 +11,7 @@ import { ContactComponent } from '../components/contact/contact.component';
 import { OrderComponent } from '../components/order/order.component';
 import { AddMenuItemComponent } from '../components/add-menu-item/add-menu-item.component';
 import { EditMenuItemComponent } from '../components/edit-menu-item/edit-menu-item.component';
+import { EditProfileImageComponent } from '../components/edit-profile-image/edit-profile-image.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { EditMenuItemComponent } from '../components/edit-menu-item/edit-menu-it
     ContactComponent,
     OrderComponent,
     AddMenuItemComponent,
-    EditMenuItemComponent
+    EditMenuItemComponent,
+    EditProfileImageComponent
   ],
   imports: [
     CommonModule,
@@ -36,7 +38,8 @@ import { EditMenuItemComponent } from '../components/edit-menu-item/edit-menu-it
     ContactComponent,
     OrderComponent,
     AddMenuItemComponent,
-    EditMenuItemComponent
+    EditMenuItemComponent,
+    EditProfileImageComponent
   ]
 })
 export class SharedModule { }

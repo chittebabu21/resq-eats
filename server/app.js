@@ -21,9 +21,9 @@ const app = express();
 dotenv.config();
 
 // use helmet to protect data in transit
-app.use(helmet({
-    strictTransportSecurity: false
-}));
+// app.use(helmet({
+//     strictTransportSecurity: false 
+// }));
 app.use(helmet.xssFilter()); // xss attack protection
 app.use(helmet.frameguard({ action: 'deny' })); // clickjacking attack protection
 

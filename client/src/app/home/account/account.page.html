@@ -6,10 +6,21 @@
     <ion-row>
       <ion-col>
         <ion-item>
-          <ion-avatar slot="start">
-            <img *ngIf="!authUserImageUrl" [src]="user.image_url" alt="profile image">
-            <img *ngIf="authUserImageUrl" [src]="authUserImageUrl" alt="google profile image">
-          </ion-avatar>
+          <div class="profile-img">
+            <ion-avatar slot="start">
+              <img *ngIf="!authUserImageUrl" [src]="user.image_url" alt="profile image">
+              <img *ngIf="authUserImageUrl" [src]="authUserImageUrl" alt="google profile image">
+            </ion-avatar>
+
+            <ion-button
+              fill="clear"
+              color="secondary"
+              (click)="onEditProfileImage(user.user_id)"
+            >
+              <ion-icon slot="icon-only" name="build-outline"></ion-icon>
+            </ion-button>
+          </div>
+          
 
           <ion-text *ngIf="isVerified" color="success">Verified</ion-text>
           <ion-text *ngIf="!isVerified" color="danger">Please check your email to verify your account</ion-text>
