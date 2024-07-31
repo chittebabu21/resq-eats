@@ -5,8 +5,6 @@ import { AlertController } from '@ionic/angular';
 import { SocialAuthService } from '@abacritt/angularx-social-login';
 
 import { UserService } from '../services/user.service';
-import { environment } from 'src/environments/environment';
-import { catchError, of, switchMap, tap } from 'rxjs';
 
 @Component({
   selector: 'app-login',

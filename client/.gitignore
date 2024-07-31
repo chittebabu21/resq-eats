@@ -70,4 +70,4 @@ testem.log
 Thumbs.db
 
 # environment variables
-/src/environment/** 
+/src/environments/** 

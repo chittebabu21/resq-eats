@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
-import { environment } from 'src/environments/environment';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-map',
