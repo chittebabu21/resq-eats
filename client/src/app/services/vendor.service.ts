@@ -14,6 +14,14 @@ export class VendorService {
 
   constructor(private http: HttpClient) { }
 
+  getAllVendors(): Observable<any> {
+    return this.http.get<{ success: number; data: Vendor[] }>(this.vendorUrl).pipe(
+      map(res => {
+        return res.data;
+      })
+    );
+  }
+
   getVendorById(id: number): Observable<any> {
     return this.http.get<{ success: number; data: Vendor }>(`${this.vendorUrl}/${id}`).pipe(
       map((res) => {
