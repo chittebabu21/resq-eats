@@ -2,6 +2,7 @@
 const {
     getAllAdmins,
     getAdminById,
+    getAdminByUserId,
     insertAdmin,
     deleteAdminById
 } = require('../services/admins.service');
@@ -27,6 +28,28 @@ module.exports = {
         const id = req.params.id;
 
         getAdminById(id, (error, results) => {
+            if (error) {
+                return res.status(400).json({
+                    success: 0,
+                    message: 'Failed to retrieve admin...'
+                });
+            } else if (!results) {
+                return res.status(500).json({
+                    success: 0,
+                    message: 'Admin not found...'
+                });
+            } else {
+                return res.status(200).json({
+                    success: 1,
+                    data: results
+                });
+            }
+        });
+    },
+    getAdminByUserId: (req, res) => {
+        const id = req.params.id;
+
+        getAdminByUserId(id, (error, results) => {
             if (error) {
                 return res.status(400).json({
                     success: 0,

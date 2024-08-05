@@ -21,6 +21,15 @@ module.exports = {
             }
         });
     },
+    getAdminByUserId: (id, callback) => {
+        pool.query('SELECT * FROM admins INNER JOIN users ON admins.user_id = users.user_id WHERE users.user_id = ?', [id], (error, results, fields) => {
+            if (error) {
+                return callback(error);
+            } else {
+                return callback(null, results[0]);
+            }
+        });
+    },
     insertAdmin: (data, callback) => {
         pool.query('INSERT INTO admins SET ?', [data], (error, results, fields) => {
             if (error) {

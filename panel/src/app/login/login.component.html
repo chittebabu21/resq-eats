@@ -1,0 +1,47 @@
+<div class="container d-flex flex-column justify-content-center aligh-items-center vh-100 vw-100">
+    <div class="row">
+        <div class="col-12">
+            <app-header [isLoggedIn]="false"></app-header>
+        </div>
+    </div>
+
+    <div class="row flex-grow-1">
+        <div class="col-12">
+            <form 
+                [formGroup]="loginForm" 
+                (ngSubmit)="onLogin()" 
+                class="d-flex justify-content-center aligh-items-center mt-5"
+            >
+                <div class="d-flex flex-column justify-content-center align-items-center">
+                    <label class="fw-bold text-center align-self-start">Email Address</label>
+                    <input 
+                        type="email"
+                        placeholder="Enter admin email..."
+                        class="border border-dark rounded-3 fs-2 mb-2"
+                        name="email_address"
+                        formControlName="email_address"
+                    />
+
+                    <label class="fw-bold text-center align-self-start">Password</label>
+                    <input 
+                        type="password"
+                        placeholder="Enter password..."
+                        class="border border-dark rounded-3 fs-2"
+                        name="password_hash"
+                        formControlName="password_hash"
+                    />
+
+                    <p *ngIf="errorMsg" class="text-danger mt-3">{{ errorMsg }}</p>
+                    <button type="submit" class="btn btn-outline-primary mt-3 px-5">LOGIN</button>
+                    <p class="text-dark fs-5 mt-3">Reset your password <a href="#" class="text-primary">here!</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <app-footer [isLoggedIn]="false"></app-footer>
+        </div>
+    </div>
+</div>
