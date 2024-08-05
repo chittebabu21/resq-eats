@@ -33,7 +33,7 @@
 
                     <p *ngIf="errorMsg" class="text-danger mt-3">{{ errorMsg }}</p>
                     <button type="submit" class="btn btn-outline-primary mt-3 px-5">LOGIN</button>
-                    <p class="text-dark fs-5 mt-3">Reset your password <a href="#" class="text-primary">here!</a></p>
+                    <p class="text-dark fs-5 mt-3">Reset your password <a (click)="openModal()" class="text-primary">here!</a></p>
                 </div>
             </form>
         </div>

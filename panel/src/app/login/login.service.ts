@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { map, Observable } from 'rxjs';
+import { catchError, map, Observable, throwError } from 'rxjs';
+import { User } from '../home/user';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,20 @@ export class LoginService {
 
   constructor(private http: HttpClient) { }
 
+  getAllUsers(): Observable<any> {
+    return this.http.get<{ success: 1; data: User[] }>(this.userUrl).pipe(
+      map(res => res.data.map((user: any) => {
+        user.created_on = new Date(user.created_on);
+
+        if (user.is_verified !== 0 && user.is_verified !== 1) {
+          throw new Error('Invalid value for isVerified field...');
+        }
+
+        return user;
+      }))
+    );
+  }
+
   getAdminByUserId(id: number): Observable<any> {
     return this.http.get<{ success: number; data: any }>(`${this.adminUrl}/user/${id}`).pipe(
       map(res => {
@@ -20,6 +35,16 @@ export class LoginService {
         res.data.image_url = `${this.baseUrl}/uploads/${res.data.image_url}` || null;
         return res.data;
       })
+    );
+  }
+
+  deleteUser(id: number): Observable<any> {
+    const token = localStorage.getItem('token');
+    const cleanedToken = token?.replace(/^['"](.*)['"]$/, '$1');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${cleanedToken}`);
+
+    return this.http.delete(`${this.userUrl}/${id}`, { headers: headers }).pipe(
+      catchError((error) => throwError(() => error))
     );
   }
 
@@ -34,6 +59,10 @@ export class LoginService {
     };
 
     return this.http.post(`${this.userUrl}/login`, payload, { headers: headers });
+  }
+
+  sendResetPasswordLink(email_address: string): Observable<any> {
+    return this.http.post(`${this.userUrl}/reset-password-request`, { email_address: email_address });
   }
 
   set(key: string, value: any) {

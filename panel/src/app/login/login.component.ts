@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { LoginService } from './login.service';
+import { SendPasswordLinkComponent } from './send-password-link/send-password-link.component';
 
 @Component({
   selector: 'app-login',
@@ -15,6 +17,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private router: Router,
+    private modal: NgbModal,
     private loginService: LoginService
   ) {}
 
@@ -69,5 +72,9 @@ export class LoginComponent implements OnInit {
 
       this.login(emailAddress, passwordHash);
     }
+  }
+
+  openModal() {
+    this.modal.open(SendPasswordLinkComponent);
   }
 }
