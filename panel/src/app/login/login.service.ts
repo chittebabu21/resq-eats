@@ -28,6 +28,21 @@ export class LoginService {
     );
   }
 
+  getUserById(id: number): Observable<User> {
+    return this.http.get<{ success: number; data: User }>(`${this.userUrl}/${id}`).pipe(
+      map(res => {
+        res.data.created_on = new Date(res.data.created_on);
+        res.data.image_url = `${this.baseUrl}/uploads/${res.data.image_url}` || null;
+
+        if (res.data.is_verified !== 0 && res.data.is_verified !== 1) {
+          throw new Error('Invalid value for isVerified field...');
+        }
+
+        return res.data;
+      }) 
+    );
+  }
+
   getAdminByUserId(id: number): Observable<any> {
     return this.http.get<{ success: number; data: any }>(`${this.adminUrl}/user/${id}`).pipe(
       map(res => {
@@ -35,6 +50,16 @@ export class LoginService {
         res.data.image_url = `${this.baseUrl}/uploads/${res.data.image_url}` || null;
         return res.data;
       })
+    );
+  }
+
+  updateUser(body: any): Observable<any> {
+    const token = localStorage.getItem('token');
+    const cleanedToken = token?.replace(/^['"](.*)['"]$/, '$1');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${cleanedToken}`);
+
+    return this.http.put(this.userUrl, body, { headers: headers }).pipe(
+      catchError((error) => throwError(() => error))
     );
   }
 
@@ -59,6 +84,10 @@ export class LoginService {
     };
 
     return this.http.post(`${this.userUrl}/login`, payload, { headers: headers });
+  }
+
+  logout() {
+    localStorage.clear();
   }
 
   sendResetPasswordLink(email_address: string): Observable<any> {

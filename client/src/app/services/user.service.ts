@@ -116,6 +116,10 @@ export class UserService {
     localStorage.clear();
   }
 
+  sendResetPasswordLink(email_address: string): Observable<any> {
+    return this.http.post(`${this.userUrl}/reset-password-request`, { email_address: email_address });
+  }
+
   set(key: string, value: any) {
     localStorage.setItem(key, JSON.stringify(value));
   }

@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Router } from '@angular/router';
 import { LoginService } from '../login/login.service';
 import { User } from './user';
+import { EditUserComponent } from './edit-user/edit-user.component';
+import { DeleteConfirmationComponent } from './delete-confirmation/delete-confirmation.component';
 
 @Component({
   selector: 'app-home',
@@ -12,7 +16,11 @@ export class HomeComponent implements OnInit {
   errorMsg = '';
   successMsg = '';
 
-  constructor(private loginService: LoginService) {}
+  constructor(
+    private loginService: LoginService, 
+    private modal: NgbModal,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.getAllUsers();
@@ -31,19 +39,23 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  deleteUser(id: number) {
-    this.loginService.deleteUser(id).subscribe({
-      next: (response: any) => {
-        const jsonResponse = response as any;
-        console.log(jsonResponse);
-        this.errorMsg = '';
-        this.successMsg = 'User deleted successfully!';
-      },
-      error: (error) => {
-        console.log(error);
-        this.errorMsg = 'Failed to delete user. Please try again.';
-      }
-    });
+  onEdit(id: number) {
+    const modalRef = this.modal.open(EditUserComponent);
+    modalRef.componentInstance.id = id;
+  }
+
+  onDelete(id: number) {
+    const modalRef = this.modal.open(DeleteConfirmationComponent);
+    modalRef.componentInstance.id = id;
+  }
+
+  onReload() {
+    window.location.reload();
+  }
+
+  onLogout() {
+    this.loginService.logout();
+    this.router.navigateByUrl('/');
   }
 
 }

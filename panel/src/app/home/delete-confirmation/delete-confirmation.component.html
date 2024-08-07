@@ -1,0 +1,23 @@
+<div class="modal-header bg-primary">
+    <div class="modal-title d-flex justify-content-between w-100">
+        <p class="fw-semibold fs-4">Delete Confirmation</p>
+        <button 
+            type="button" 
+            class="btn-close" 
+            aria-label="Close" 
+            (click)="onClose()"
+        >
+    </button>
+    </div>
+</div>
+
+<div class="modal-body d-flex flex-column justify-content-center">
+    <h5 class="fs-5 fw-semibold text-primary text-center my-3">Do you want delete this user?</h5>
+    <div class="d-flex justify-content-around">
+        <button type="button" (click)="onClose()" class="btn btn-outline-secondary">CANCEL</button>
+        <button type="button" (click)="deleteUser(id)" class="btn btn-outline-danger">DELETE</button>
+    </div>
+   
+    <p class="text-danger text-center">{{ errorMsg }}</p>
+    <p class="text-success text-center">{{ successMsg }}</p>
+</div>

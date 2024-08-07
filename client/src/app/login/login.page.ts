@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AlertController } from '@ionic/angular';
+import { AlertController, ModalController } from '@ionic/angular';
 import { SocialAuthService } from '@abacritt/angularx-social-login';
 
 import { UserService } from '../services/user.service';
+import { ResetPasswordComponent } from '../components/reset-password/reset-password.component';
 
 @Component({
   selector: 'app-login',
@@ -21,6 +22,7 @@ export class LoginPage implements OnInit {
     private userService: UserService, 
     private router: Router,
     private alertCtrl: AlertController,
+    private modalCtrl: ModalController,
     private socialAuthService: SocialAuthService
   ) { }
 
@@ -144,5 +146,11 @@ export class LoginPage implements OnInit {
     setTimeout(() => {
       successAlert.dismiss();
     }, 3000);
+  }
+
+  openModal() {
+    this.modalCtrl.create({
+      component: ResetPasswordComponent
+    }).then(modalEl => modalEl.present());
   }
 }

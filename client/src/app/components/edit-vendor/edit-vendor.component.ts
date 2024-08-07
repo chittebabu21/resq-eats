@@ -108,7 +108,10 @@ export class EditVendorComponent implements OnInit {
           return;
         }
       }
-    }).catch(error => console.log(error));
+    }).catch(error => {
+      console.log(error);
+      return;
+    });
   }
 
   onSubmit() {

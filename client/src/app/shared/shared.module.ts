@@ -12,6 +12,7 @@ import { OrderComponent } from '../components/order/order.component';
 import { AddMenuItemComponent } from '../components/add-menu-item/add-menu-item.component';
 import { EditMenuItemComponent } from '../components/edit-menu-item/edit-menu-item.component';
 import { EditProfileImageComponent } from '../components/edit-profile-image/edit-profile-image.component';
+import { ResetPasswordComponent } from '../components/reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { EditProfileImageComponent } from '../components/edit-profile-image/edit
     OrderComponent,
     AddMenuItemComponent,
     EditMenuItemComponent,
-    EditProfileImageComponent
+    EditProfileImageComponent,
+    ResetPasswordComponent
   ],
   imports: [
     CommonModule,

@@ -7,7 +7,30 @@
 
     <div class="row flex-grow-1">
         <div class="col-12">
-            <h4 class="text-dark text-center fs-4 fw-semibold">Users</h4>
+            <div class="d-flex justify-content-center position-relative">
+                <h4 class="text-dark text-center fs-4 fw-semibold">Users</h4>
+                <button class="btn position-absolute end-0" (click)="onLogout()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z"/>
+                        <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z"/>
+                    </svg>
+                </button>
+                <button class="btn position-absolute start-0" (click)="onReload()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-clockwise" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2z"/>
+                        <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <ngb-alert *ngIf="successMsg" [dismissible]="false" type="success">
+                <strong>Success!</strong> {{ successMsg }}
+            </ngb-alert>
+
+            <ngb-alert *ngIf="errorMsg" [dismissible]="false" type="danger">
+                <strong>Warning!</strong> {{ errorMsg }}
+            </ngb-alert>
+
             <table class="table table-hover">
                 <thead class="bg-dark text-light">
                     <th scope="col">ID</th>
@@ -25,10 +48,10 @@
                         <td>{{ user.email_address }}</td>
                         <td>{{ user.is_verified }}</td>
                         <td>
-                            <button class="btn btn-outline-warning">EDIT</button>
+                            <button class="btn btn-outline-warning" (click)="onEdit(user.user_id)">EDIT</button>
                         </td>
                         <td>
-                            <button class="btn btn-outline-danger" (click)="deleteUser(user.user_id)">&times;</button>
+                            <button class="btn btn-outline-danger" (click)="onDelete(user.user_id)">&times;</button>
                         </td>
                     </tr>
                 </tbody>

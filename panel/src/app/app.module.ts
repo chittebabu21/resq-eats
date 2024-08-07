@@ -11,6 +11,8 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
 import { SendPasswordLinkComponent } from './login/send-password-link/send-password-link.component';
+import { EditUserComponent } from './home/edit-user/edit-user.component';
+import { DeleteConfirmationComponent } from './home/delete-confirmation/delete-confirmation.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import { SendPasswordLinkComponent } from './login/send-password-link/send-passw
     HeaderComponent,
     FooterComponent,
     HomeComponent,
-    SendPasswordLinkComponent
+    SendPasswordLinkComponent,
+    EditUserComponent,
+    DeleteConfirmationComponent
   ],
   imports: [
     BrowserModule,

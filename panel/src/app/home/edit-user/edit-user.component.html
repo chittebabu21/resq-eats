@@ -1,0 +1,39 @@
+<div class="modal-header bg-primary">
+    <div class="modal-title d-flex justify-content-between w-100">
+        <p class="fw-semibold fs-4">Send Reset Password Link</p>
+        <button 
+            type="button" 
+            class="btn-close" 
+            aria-label="Close" 
+            (click)="onClose()"
+        >
+    </button>
+    </div>
+</div>
+
+<div class="modal-body d-flex flex-column justify-content-center">
+    <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+        <label for="username">Username</label>
+        <input 
+            type="text"
+            formControlName="username"
+            class="form-control"
+        />
+
+        <label for="email_address">Email Address</label>
+        <input 
+            type="email" 
+            formControlName="email_address" 
+            class="form-control"
+        />
+
+        <div class="d-flex justify-content-between mx-5">
+            <button type="button" class="btn btn-outline-secondary mt-3" (click)="onClose()">CANCEL</button>
+            <button type="submit" class="btn btn-outline-primary mt-3">SAVE</button>
+        </div>
+        
+    </form>
+
+    <p class="text-danger text-center">{{ errorMsg }}</p>
+    <p class="text-success text-center">{{ successMsg }}</p>
+</div>

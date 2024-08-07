@@ -42,7 +42,7 @@ export class SendPasswordLinkComponent implements OnInit {
           setTimeout(() => {
             this.modal.dismiss();
             this.router.navigateByUrl('/');
-          }, 3000);
+          }, 2000);
         },
         error: (error) => {
           this.errorMsg = 'Failed to send reset password link. Please try again.';
