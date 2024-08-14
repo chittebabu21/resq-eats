@@ -15,6 +15,7 @@ const adminRouter = require('./routes/admins.route');
 const menuRouter = require('./routes/menu.route');
 const orderRouter = require('./routes/orders.route');
 const passportRouter = require('./routes/passport.route');
+const paymentRouter = require('./routes/payment.route');
 
 // initialize dependencies
 const app = express();
@@ -67,6 +68,7 @@ app.use('/admins', adminRouter);
 app.use('/menu', menuRouter);
 app.use('/orders', orderRouter);
 app.use('/auth', passportRouter);
+app.use('/create-payment-intent', paymentRouter);
 
 // listen on port
 app.listen(port, () => {

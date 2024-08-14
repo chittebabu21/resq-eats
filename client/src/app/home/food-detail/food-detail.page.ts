@@ -37,10 +37,11 @@ export class FoodDetailPage implements OnInit {
           next: (response: Food) => {
             this.food = response;
             this.foodService.getFoodByVendorId(this.food.vendor_id).subscribe({
-              next: (response) => {
-                this.vendorName = response.vendor_name;
-                this.contactNumber = response.contact_no;
-                this.address = response.address;
+              next: (response: any) => {
+                const jsonResponse = response as any;
+                this.vendorName = jsonResponse[0].vendor.vendor_name;
+                this.contactNumber = jsonResponse[0].vendor.contact_no;
+                this.address = jsonResponse[0].vendor.address;
               },
               error: (error) => {
                 console.log(error);
@@ -57,7 +58,15 @@ export class FoodDetailPage implements OnInit {
 
   onOrder() {
     this.modalCtrl.create({
-      component: OrderComponent
+      component: OrderComponent,
+      componentProps: { 
+        selectedFood: this.food,
+        selectedVendor: {
+          vendorName: this.vendorName,
+          contactNumber: this.contactNumber,
+          address: this.address
+        }
+      }
     }).then(modalEl => modalEl.present());
   }
 }

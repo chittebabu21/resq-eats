@@ -29,3 +29,13 @@ ion-accordion.accordion-expanded ion-item[slot='header'] {
     --background: var(--ion-color-secondary);
     --color: var(--ion-color-primary-contrast);
 }
+
+ion-toggle::part(track) {
+    height: 20px;
+    width: 80px;
+  
+    /* Required for iOS handle to overflow the height of the track */
+    overflow: visible;
+}
+  
+  

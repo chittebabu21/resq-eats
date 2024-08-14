@@ -9,6 +9,37 @@
     justify-content: flex-end;
 }
 
+.food-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.order-btn {
+    margin-top: 20px;
+}
+
+.details {
+    margin: 10px 5px 20px;
+}
+
+.card-details {
+    margin: 20px 10px;
+}
+
+.error {
+    color: var(--ion-color-danger);
+}
+
+.quantity {
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+}
+
+.quantity ion-input {
+    text-align: center;
+}
+
 ion-button {
     margin-right: 20px;
 }

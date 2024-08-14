@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { Observable, map } from 'rxjs';
+import { Observable, catchError, map, tap, throwError } from 'rxjs';
 
 import { Order } from '../interfaces/order';
 import { User } from '../interfaces/user';
@@ -95,6 +95,27 @@ export class OrderService {
           } as Food
         }) as OrderDetails);
       })
+    );
+  }
+
+  insertOrderWithOrderDetails(body: any): Observable<any> {
+    const token = localStorage.getItem('token');
+    const cleanedToken = token?.replace(/^['"](.*)['"]$/, '$1');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${cleanedToken}`);
+
+    return this.http.post(this.orderUrl, body, { headers: headers }).pipe(
+      catchError((error) => throwError(() => error))
+    );
+  }
+
+  updateOrder(body: any): Observable<any> {
+    const token = localStorage.getItem('token');
+    const cleanedToken = token?.replace(/^['"](.*)['"]$/, '$1');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${cleanedToken}`);
+
+    return this.http.put(this.orderUrl, body, { headers: headers }).pipe(
+      tap((res) => console.log(res)),
+      catchError((error) => throwError(() => error))
     );
   }
 }

@@ -17,6 +17,23 @@
           Order Status: {{ order.order_status }}<br>
           Ordered On: {{ order.ordered_on | date }}<br>
         </ion-text>
+
+        <ion-button
+          *ngIf=" order.order_status === 'Pending' "
+          color="primary"
+          (click)="onCollection()"
+          size="medium"
+        >
+          COLLECTED
+          <ion-icon name="checkmark-outline" slot="end"></ion-icon>
+        </ion-button>
+
+        <!-- <ion-toggle
+          labelPlacement="start"
+          color="primary"
+          *ngIf=" order.order_status === 'Pending' "
+          (ionChange)="onCollection($event)"
+        >Collected</ion-toggle> -->
       </div>
     </ion-accordion>
   </ion-accordion-group>

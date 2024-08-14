@@ -13,8 +13,76 @@
             <ion-icon name="close-outline" slot="icon-only" color="primary"></ion-icon>
           </ion-button>
         </div>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <!-- <div class="food-details">
+          <ion-text color="primary">Item: {{ selectedFood.food_name }}</ion-text><br>
+          <ion-text color="primary">Price: {{ selectedFood.price | currency }}</ion-text><br>
+          <ion-text color="primary">Vendor: {{ selectedVendor.vendorName }}</ion-text><br>
+          <ion-text color="primary">Collect At: {{ selectedVendor.address }}</ion-text><br>
+          <ion-text color="primary">Contact: {{ selectedVendor.contactNumber }}</ion-text>
+        </div> -->
+       <form [formGroup]="paymentForm">
+        <div class="details">
+          <ion-item>
+            <ion-label position="floating">Username</ion-label>
+            <ion-input type="text" formControlName="username"></ion-input>
+          </ion-item>
+  
+          <ion-item>
+            <ion-label position="floating">Email Address</ion-label>
+            <ion-input type="email" formControlName="email_address"></ion-input>
+          </ion-item>
+  
+          <ion-item>
+            <ion-label position="floating">Amount</ion-label>
+            <ion-input type="number" formControlName="amount"></ion-input>
+          </ion-item>
+        </div>
+
+        <ion-item class="quantity" lines="none">
+          <ion-button
+            fill="clear"
+            color="secondary"
+            size="large"
+            (click)="remove()"
+          >
+            <ion-icon name="remove-circle-outline" slot="icon-only"></ion-icon>
+          </ion-button>
+          <ion-input type="number" formControlName="quantity" fill="outline"/>
+          <ion-button
+            fill="clear"
+            color="secondary"
+            size="large"
+            (click)="add()"
+          >
+            <ion-icon name="add-circle-outline" slot="icon-only"></ion-icon>
+          </ion-button>
+        </ion-item>
+
+        <div class="card-details">
+          <ngx-stripe-card
+            [options]="cardOptions"
+            [elementsOptions]="elementsOptions"
+            containerClass="card-details"
+          ></ngx-stripe-card>
+        </div>
+
+        <p *ngIf="errorMsg" class="error">{{ errorMsg }}</p>
         
-        <ion-text color="success">Order Modal</ion-text>
+        <ion-button
+          fill="solid"
+          type="submit"
+          size="large"
+          color="primary"
+          class="order-btn"
+          [disabled]="paymentForm.invalid"
+          (click)="pay()"
+        >PAY</ion-button>
+       </form>
       </ion-col>
     </ion-row>
   </ion-grid>

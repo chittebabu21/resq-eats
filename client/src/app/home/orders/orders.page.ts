@@ -14,6 +14,7 @@ import { Food } from 'src/app/interfaces/food';
 export class OrdersPage implements OnInit {
   @ViewChild('accordionGroup', {static: true}) accordionGroup!: IonAccordionGroup;
   orders!: Order[];
+  orderId!: number;
   userId!: number;
   orderDetailsMap: Map<number, Food> = new Map(); // store order details mapped by order id
   hasOrders = false;
@@ -41,6 +42,7 @@ export class OrdersPage implements OnInit {
               this.orderService.getOrderWithDetails(order.order_id).subscribe({
                 next: (response: any) => {
                   const jsonResponse = response as any;
+                  this.orderId = order.order_id;
                   this.getOrderDetailsByFoodId(jsonResponse.food_id, order.order_id);
                 },
                 error: (error) => {
@@ -68,6 +70,18 @@ export class OrdersPage implements OnInit {
       },
       error: (error) => {
         console.log(error);
+      }
+    });
+  }
+
+  onCollection() {
+    this.orderService.updateOrder({ order_id: this.orderId, order_status: 'Completed' }).subscribe({
+      next: (response: any) => {
+        console.log(response.success);
+        this.onRefresh();
+      },
+      error: (error) => {
+        throw new Error(error);
       }
     });
   }
