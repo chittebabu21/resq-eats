@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NavController } from '@ionic/angular';
-import { ModalController } from '@ionic/angular';
+import { ModalController, AlertController } from '@ionic/angular';
 
-import { FoodService } from 'src/app/services/food.service';
-import { Food } from 'src/app/interfaces/food';
-import { OrderComponent } from 'src/app/components/order/order.component';
+import { FoodService } from '../../services/food.service';
+import { UserService } from '../../services/user.service';
+import { Food } from '../../interfaces/food';
+import { OrderComponent } from '../../components/order/order.component';
 
 @Component({
   selector: 'app-food-detail',
@@ -23,7 +24,9 @@ export class FoodDetailPage implements OnInit {
     private activatedRoute: ActivatedRoute,
     private navCtrl: NavController,
     private modalCtrl: ModalController,
-    private foodService: FoodService
+    private alertCtrl: AlertController,
+    private foodService: FoodService,
+    private userService: UserService
   ) { }
 
   ngOnInit() {
@@ -57,16 +60,41 @@ export class FoodDetailPage implements OnInit {
   }
 
   onOrder() {
-    this.modalCtrl.create({
-      component: OrderComponent,
-      componentProps: { 
-        selectedFood: this.food,
-        selectedVendor: {
-          vendorName: this.vendorName,
-          contactNumber: this.contactNumber,
-          address: this.address
+    const userId = this.userService.get('userId')!;
+
+    this.userService.getUserById(parseInt(userId)).subscribe({
+      next: async (response: any) => {
+        const user = response;
+
+        if (user && user.is_verified === 1) {
+          this.modalCtrl.create({
+            component: OrderComponent,
+            componentProps: { 
+              selectedFood: this.food,
+              selectedVendor: {
+                vendorName: this.vendorName,
+                contactNumber: this.contactNumber,
+                address: this.address
+              }
+            }
+          }).then(modalEl => modalEl.present());
+        } else {
+          const errorAlert = await this.alertCtrl.create({
+            header: 'ACCESS DENIED!',
+            message: 'Please verify your account to proceed to order page.',
+            backdropDismiss: false,
+            buttons: [{
+              text: 'OK',
+              handler: () => {
+                this.navCtrl.navigateBack('/home/main');
+              }
+            }]
+          });
+
+          await errorAlert.present();
         }
       }
-    }).then(modalEl => modalEl.present());
+    });
+    
   }
 }
