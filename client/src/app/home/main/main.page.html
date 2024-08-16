@@ -22,18 +22,19 @@
         fill="outline"
         clearInput="true"
         shape="round"
+        #searchInput
       >
-        <ion-button fill="clear" slot="end" size="large"> 
+        <ion-button fill="clear" slot="end" size="large" [disabled]="true"> 
           <ion-icon slot="icon-only" name="search-outline"></ion-icon>
         </ion-button>
       </ion-input>
     </ion-item>
   
-    <ion-item color="light">
+    <!-- <ion-item color="light">
       <ion-button fill="clear" slot="end" shape="round" size="large">
         <ion-icon name="filter-outline"></ion-icon>
       </ion-button>
-    </ion-item>
+    </ion-item> -->
   
     <ion-item>
       <ion-list class="card-list">  
@@ -41,7 +42,7 @@
           color="light" 
           button
           lines="none" 
-          *ngFor="let item of food" 
+          *ngFor="let item of filteredFood" 
           (click)="navigateToFoodDetail(item.food_id)"
         >
           <ion-card>
