@@ -12,7 +12,6 @@ export const userGuard: CanActivateFn = (route, state) => {
   if (token) {
     return true;
   } else {
-    alert('Login to continue...');
     localStorage.clear();
     router.navigateByUrl('/');
     return false;
