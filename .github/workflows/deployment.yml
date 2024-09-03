@@ -1,5 +1,5 @@
 name: Deploy Project
-on: push
+on: [push, workflow_dispatch]
 defaults: 
     run: 
         working-directory: server
@@ -13,5 +13,3 @@ jobs:
               uses: actions/setup-node@v4
             - name: Install dependencies
               run: npm install
-            - name: Start server
-              run: npm run start
