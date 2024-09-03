@@ -1,13 +1,14 @@
 name: Deploy Project
 on: push
+defaults: 
+    run: 
+        working-directory: server
 jobs: 
     deploy:
         runs-on: macos-latest
         steps: 
             - name: Get code
               uses: actions/checkout@v4
-            - name: Change into server directory
-              run: cd server
             - name: Setup NodeJS
               uses: actions/setup-node@v4
             - name: Install dependencies
