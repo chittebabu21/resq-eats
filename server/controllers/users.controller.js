@@ -223,7 +223,8 @@ module.exports = {
                     if (error) {
                         return res.status(400).json({
                             success: 0,
-                            message: 'Failed to delete user...'
+                            message: 'Failed to delete user...',
+                            error: error.message
                         });
                     } else {
                         return res.status(200).json({

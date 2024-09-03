@@ -30,6 +30,10 @@ export class DeleteConfirmationComponent implements OnInit {
         console.log(jsonResponse);
         this.errorMsg = '';
         this.successMsg = 'User deleted successfully!';
+
+        setTimeout(() => {
+          this.onClose();
+        }, 3000);
       },
       error: (error) => {
         console.log(error);

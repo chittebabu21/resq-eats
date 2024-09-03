@@ -21,7 +21,7 @@
         <ion-button
           *ngIf=" order.order_status === 'Pending' "
           color="primary"
-          (click)="onCollection()"
+          (click)="onCollection(order.order_id)"
           size="medium"
         >
           COLLECTED

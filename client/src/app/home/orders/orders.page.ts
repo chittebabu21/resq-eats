@@ -74,8 +74,8 @@ export class OrdersPage implements OnInit {
     });
   }
 
-  onCollection() {
-    this.orderService.updateOrder({ order_id: this.orderId, order_status: 'Completed' }).subscribe({
+  onCollection(orderId: number) {
+    this.orderService.updateOrder({ order_id: orderId, order_status: 'Completed' }).subscribe({
       next: (response: any) => {
         console.log(response.success);
         this.onRefresh();
