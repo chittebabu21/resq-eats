@@ -1,0 +1,12 @@
+name: Deploy Project
+on: push
+jobs: 
+    deploy:
+        runs-on: macos-latest
+        steps: 
+            - name: Change into server directory
+              run: cd server
+            - name: Install dependencies
+              run: npm ci
+            - name: Start server
+              run: npm run start
