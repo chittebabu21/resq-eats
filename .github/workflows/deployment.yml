@@ -17,7 +17,7 @@ env:
   STRIPE_SECRET: ${{ secrets.STRIPE_SECRET }}
 defaults: 
     run: 
-        working-directory: server
+      working-directory: server
 jobs: 
     test:
       environment: Test
@@ -41,4 +41,4 @@ jobs:
       runs-on: macos-latest
       steps:
         - name: Output event
-          run: echo "${{ toJson(github.event) }}"
+          run: echo "Deployed on ${{ env.PORT }}"
