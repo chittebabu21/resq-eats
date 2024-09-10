@@ -1,5 +1,11 @@
-name: Deploy Project
-on: [push, workflow_dispatch]
+name: Deployment
+on: 
+  workflow_dispatch:
+  push:
+    branches: main
+    paths-ignore: './github/workflows/*'
+env:
+  PORT: 4000
 defaults: 
     run: 
         working-directory: server
