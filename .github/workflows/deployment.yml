@@ -40,5 +40,7 @@ jobs:
       needs: test
       runs-on: macos-latest
       steps:
+        - name: Get code
+          uses: actions/checkout@v4
         - name: Output event
           run: echo "Deployed on ${{ env.PORT }}"
