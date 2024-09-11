@@ -1,4 +1,6 @@
-# Final project
+# ResQ Eats
+### Server: Node.JS & Express.JS
+### Client: Angular 18 & Ionic 7
 
 #### Clone repository with `git clone https://github.com/chittebabu21/resq-eats.git`
 #### To install dependencies in server, change into server directory with `cd server` and install dependencies with `npm install`
